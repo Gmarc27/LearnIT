@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     return res.json("From Backend Side");
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', (req, res) => {   
     const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
         if (err) {
