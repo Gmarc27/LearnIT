@@ -1,0 +1,122 @@
+/* styles.css */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  .sidebarIcon {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #F0F8FF; /* Cyan color */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .profileImage {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    border-radius: 40px; /* Make it round */
+  }
+  
+  .profileTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .sidebarButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .buttonText {
+    margin-left: 10px;
+  }
+  
+  .courseItem {
+    margin-bottom: 20px;
+  }
+  
+  .courseTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .courseDescription {
+    margin-bottom: 10px;
+  }
+  
+  .progressBar {
+    height: 30px;
+    width: 30%;
+    margin-bottom: 10px;
+  }
+  
+  .courseImage {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 100px;
+    padding: 5px;
+    background: gray;
+  }
+  
+  .viewContentButton {
+    display: flex;
+    color: white;
+    background-color: #2296F3;
+    border-radius: 5px;
+    padding: 10px 20px;
+    align-items: center;
+    margin-top: 20px;
+    width: 30%;
+    cursor: pointer;
+    justify-content: center;
+  }
+
+  .addButton {
+    display: flex;
+    background-color: #2296F3;
+    border-radius: 5px;
+    padding: 10px 20px;
+    align-items: center;
+    margin-top: 20px;
+    width: 30%;
+    cursor: pointer;
+    justify-content: center;
+  }
+
+  .addButton:hover {
+    background-color: darkblue;
+  }
+
+  .addButton:active {
+    background-color: blue;
+  }
+  
+  .addButtonLabel {
+    color: white;
+    font-size: 16px;
+  }
+  
