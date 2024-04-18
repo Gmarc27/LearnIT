@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/LearnIT/static/css/main.12edae96.css",
+    "main.js": "/LearnIT/static/js/main.80e17d4e.js",
+    "static/js/453.1118f7d6.chunk.js": "/LearnIT/static/js/453.1118f7d6.chunk.js",
+    "static/media/profile.jpg": "/LearnIT/static/media/profile.0bfb883dddf5359d22bd.jpg",
+    "static/media/course2.png": "/LearnIT/static/media/course2.f65457d9f876ce936cfc.png",
+    "index.html": "/LearnIT/index.html",
+    "main.12edae96.css.map": "/LearnIT/static/css/main.12edae96.css.map",
+    "main.80e17d4e.js.map": "/LearnIT/static/js/main.80e17d4e.js.map",
+    "453.1118f7d6.chunk.js.map": "/LearnIT/static/js/453.1118f7d6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12edae96.css",
+    "static/js/main.80e17d4e.js"
+  ]
+}
