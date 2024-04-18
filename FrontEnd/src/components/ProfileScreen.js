@@ -49,7 +49,7 @@ const ProfileScreen = () => {
   }
 
   const handleHome = (e) => {
-    navigate('/');
+    navigate('/LearnIT');
   };
 
 

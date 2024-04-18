@@ -14,7 +14,7 @@ const SignupScreen = () => {
     };
 
     const handleHome = (e) => {
-        navigate('/');
+        navigate('/LearnIT');
     };
 
     const handleSignup = async () => {
