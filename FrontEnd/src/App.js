@@ -12,6 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/LearnIT" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/ProfileScreen" element={<ProfileScreen />} />
         <Route path="/LoginScreen" element={<LoginScreen />} />
         <Route path="/SignupScreen" element={<SignupScreen />} />
