@@ -17,7 +17,7 @@ const ProfileScreen = () => {
       try {
         const userId = localStorage.getItem('token');
         console.log(userId); // Log the user ID
-        const response = await axios.get(`http://localhost:8000/users/${userId}`);
+        const response = await axios.get(`https://learnit2024.onrender.com/users/${userId}`);
         setUserData(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -30,7 +30,7 @@ const ProfileScreen = () => {
   const handleSaveBio = async () => {
     try {
       const userId = localStorage.getItem('token');
-      await axios.put(`http://localhost:8000/users/${userId}`, { bio: newBio });
+      await axios.put(`https://learnit2024.onrender.com/users/${userId}`, { bio: newBio });
       setUserData({ ...userData, bio: newBio }); // Update the bio in the local state
       setEditingBio(false); // Exit editing mode
     } catch (error) {
