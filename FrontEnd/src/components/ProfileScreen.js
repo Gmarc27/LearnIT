@@ -1,96 +1,214 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { MdSettings, MdExitToApp } from 'react-icons/md'; // Using icons from react-icons
 import profileImage from '../assets/profile.jpg'; // Import profile image
-import course1Image from '../assets/course1.png'; // Import course 1 image
-import course2Image from '../assets/course2.png'; // Import course 2 image
+
 
 const ProfileScreen = () => {
-  const [courseProgress, setCourseProgress] = useState({});
+  const [userData, setUserData] = useState(null);
+  const [editingBio, setEditingBio] = useState(false); // State to track if bio is being edited
+  const [newBio, setNewBio] = useState(''); // State to store the new bio
+  const navigate = useNavigate();
+  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem('token');
+        console.log(userId); // Log the user ID
+        const response = await axios.get(`http://localhost:8000/users/${userId}`);
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleSaveBio = async () => {
+    try {
+      const userId = localStorage.getItem('token');
+      await axios.put(`http://localhost:8000/users/${userId}`, { bio: newBio });
+      setUserData({ ...userData, bio: newBio }); // Update the bio in the local state
+      setEditingBio(false); // Exit editing mode
+    } catch (error) {
+      console.error('Error updating bio:', error);
+    }
+  };
+
 
   const handleLogout = () => {
-    // Implement logout logic here
+    localStorage.removeItem('token'); // Remove token from localStorage
+    navigate('/LoginScreen'); // Redirect to login screen
   };
+
+  const handleMyLearning = () => {
+    navigate('/MyLearning');
+  }
+
+  const handleHome = (e) => {
+    navigate('/');
+  };
+
 
   const handleSettings = () => {
     // Navigate to settings screen or implement settings logic here
   };
 
-  const handleAddCourse = () => {
-    // Navigate to CourseContentScreen
-  };
-
-  const handleViewContent = (content) => {
-    // Navigate to CourseContentScreen passing the content
-  };
-
-  const handleProgressUpdate = (courseId, progress) => {
-    setCourseProgress(prevProgress => ({
-      ...prevProgress,
-      [courseId]: progress,
-    }));
-  };
-
-  // Sample data for courses and their progress
-  const courses = [
-    { 
-      id: '1', 
-      title: 'HTML', 
-      description: 'This is the description for Course 1.', 
-      content: 'Course content for Course 1. This could be a long text describing the course content in detail.',
-      image: course1Image,
-      progress: courseProgress['1'] || 0
-    },
-    { 
-      id: '2', 
-      title: 'CSS', 
-      description: 'This is the description for Course 2.', 
-      content: 'Course content for Course 2. This could be a long text describing the course content in detail.',
-      image: course2Image,
-      progress: courseProgress['2'] || 0
-    },
-    // Add more courses as needed
-  ];
-
-  // Function to simulate progress increase for a course
-  const increaseProgress = (courseId) => {
-    const currentProgress = courseProgress[courseId] || 0;
-    const newProgress = Math.min(currentProgress + 10, 100); // Increment by 10%, but ensure it doesn't exceed 100%
-    handleProgressUpdate(courseId, newProgress);
-  };
 
   return (
-    <div className="container">
-        <div className="sidebar">
-          <img src={profileImage} alt="Profile" className="profileImage" />
-          <div className="profileTitle">John Doe</div>
+    <div> 
+        <div style={styles.nav} onClick={handleHome}> LearnIT </div>
+      <div style={styles.container}>
+          <div style={styles.profilecontainer}>
+
+    {userData && (
+        <div style={styles.profilecontainer2}>
+                  <img src={profileImage} alt="Profile" className="profileImage" />
+                  <div className="profileTitle">{userData.firstname} {userData.lastname}</div>
+          <div style={styles.profiledescription}>
+                <div style={styles.desc}>Student ID: {userData.studentID}</div>
+                <div style={styles.desc}>Points: {userData.points}</div>
+                {editingBio ? (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <input
+                    type="text"
+                    value={newBio}
+                    onChange={(e) => setNewBio(e.target.value)}
+                  />
+                  <button onClick={handleSaveBio}>Save</button>
+                </div>
+              ) : (
+                <div style={styles.desc}>
+            
+                  <span>Bio: {userData.bio}</span>
+                  <div 
+                  style={styles.EditBio} 
+                  onClick={() => setEditingBio(true)} 
+                  onMouseEnter={(e) => {
+                    e.target.style.boxShadow = '0px 0px 20px rgba(0, 0, 0, 0.4)';
+                    }} 
+                    onMouseLeave={(e) => {
+                    e.target.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2)';
+                    }}
+                  >
+                    Edit Bio
+                  </div>
+                </div>
+              )}
+          </div>
+          <div style={styles.mylearning} 
+            onMouseEnter={(e) => {
+              e.target.style.boxShadow = '0px 0px 20px rgba(0, 0, 0, 0.4)';
+              }} 
+              onMouseLeave={(e) => {
+              e.target.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2)';
+              }}
+          >
+                <span  style={styles.mylearning}  onClick={handleMyLearning}>My Learnings</span>
+          </div>
+        </div>
+      )}
+      <div className="sidebarBottom">
           <div className="sidebarButton" onClick={handleSettings}>
-            <MdSettings size={24} color="black" />
-            <span className="buttonText">Settings</span>
+                <MdSettings size={24} color="white" />
+                <span className="buttonText">Settings</span>
           </div>
           <div className="sidebarButton" onClick={handleLogout}>
-            <MdExitToApp size={24} color="black" />
-            <span className="buttonText">Logout</span>
+                <MdExitToApp size={24} color="white" />
+                <span className="buttonText"  onClick={handleLogout}>Logout</span>
           </div>
-        </div>
-      <div className="content">
-        <div className="title">My Courses</div>
-        {courses.map(course => (
-          <div key={course.id} className="courseItem">
-            <img src={course.image} alt={course.title} className="courseImage" />
-            <div className="courseTitle">{course.title}</div>
-            <div className="courseDescription">{course.description}</div>
-            <progress className="progressBar" value={course.progress} max={100}></progress>
-            <div>
-            <button className="viewContentButton" onClick={() => handleViewContent(course.content)}>View Content</button>
-            </div>
           </div>
-        ))}
-        <div className="addButton" onClick={handleAddCourse}>
-          <span className="addButtonLabel">Add Another Course</span>
-        </div>
+          </div>
       </div>
-    </div>
+      </div>
   );
 };
+
+const styles = {
+
+  container: {
+    display: 'flex',
+    height: '93vh',
+    marginTop: '2vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position:'relative',
+  },
+
+  nav: {
+    display: 'flex',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    margin: '10px',
+    padding: '10px',
+    border: '1px solid black',
+    cursor: 'pointer'
+  },
+
+  profilecontainer: {
+    display: 'flex',
+    padding: '50px',
+    height: '80vh',
+    width: '50%',
+    justifyContent: 'center',
+    position:'absolute',
+    borderRadius: '15px',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.8)',
+  },
+
+  profilecontainer2: {
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+
+  },
+
+  profiledescription: {
+    display: 'flex',
+    flexDirection: 'column',
+
+  },
+
+  desc: {
+    padding: '10px',
+    margin: '10px',
+    display: 'flex',
+    flexDirection: 'column'
+
+  },
+
+  mylearning: {
+    display: 'flex',
+    width: '100%',
+    height: '50px',
+    backgroundColor: '#28B498',
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+  },
+
+  EditBio: {
+    display: 'flex',
+    backgroundColor: '#28B498',
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+    marginTop: '5px',
+  },
+
+}
+
+
 
 export default ProfileScreen;

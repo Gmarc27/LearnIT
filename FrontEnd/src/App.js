@@ -5,8 +5,13 @@ import ProfileScreen from './components/ProfileScreen';
 import Home from './components/Home';
 import LoginScreen from './components/LoginScreen';
 import SignupScreen from './components/SignupScreen';
+import MyLearning from './components/MyLearning';
+
+
 
 function App() {
+
+
   return (
     <Router>
       <Routes>
@@ -14,6 +19,7 @@ function App() {
         <Route path="/ProfileScreen" element={<ProfileScreen />} />
         <Route path="/LoginScreen" element={<LoginScreen />} />
         <Route path="/SignupScreen" element={<SignupScreen />} />
+        <Route path="/MyLearning" element={<MyLearning />} />
       </Routes>
     </Router>
   );

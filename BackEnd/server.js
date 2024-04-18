@@ -7,11 +7,12 @@ app.use(cors());
 app.use(express.json()); // Add JSON parsing middleware
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: 'id22053581_learnit2024',
-    password: 'LearnIT2024!',
-    database: 'id22053581_learnit'
+    host: "sql6.freesqldatabase.com",
+    user: 'sql6699810',
+    password: 'hPlpRvY1DL',
+    database: 'sql6699810'
 });
+
 
 db.connect((err) => {
     if (err) {
@@ -25,7 +26,7 @@ app.get('/', (req, res) => {
     return res.json("From Backend Side");
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', (req, res) => {   
     const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
         if (err) {
@@ -36,6 +37,35 @@ app.get('/users', (req, res) => {
     });
 });
 
+app.get('/users/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const sql = "SELECT * FROM users WHERE ID = ?";
+    db.query(sql, [userId], (err, data) => {
+        if (err) {
+            console.error('Error fetching user data:', err);
+            return res.status(500).json({ error: 'Error fetching user data' });
+        }
+        if (data.length > 0) {
+            return res.json(data[0]); // Return user data
+        } else {
+            return res.status(404).json({ error: 'User not found' }); // User not found
+        }
+    });
+});
+
+app.post('/LoginScreen', (req, res) => {
+    const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if(err) return res.json("Login Failed");
+        if(data.length > 0){
+            console.log(data);
+            return res.json({ message: "Login Successfully", userId: data[0].ID }); // Include user ID in response
+          } else {
+            return res.json("No Record")
+          }
+    })
+})
+
 app.post('/SignupScreen', (req, res) => {
     const { studentID, email, firstName, lastName, password } = req.body;
   
@@ -45,17 +75,41 @@ app.post('/SignupScreen', (req, res) => {
     db.query(query, [studentID, email, firstName, lastName, password], (err, result) => {
         if (err) {
             console.error('Error inserting user data:', err);
-            if (err.code === 'ER_DUP_ENTRY') {
-                return res.status(409).send('User already exists');
-            }
-            return res.status(500).send('Error inserting user data');
         }
         console.log('User data inserted successfully:', result);
         res.status(200).send('User data inserted successfully');
     });
 });
 
-const PORT = process.env.PORT || 8081;
+
+app.post('/addcourse', (req, res) => {
+    const { title, description, content, progress } = req.body;
+    const query = 'INSERT INTO course ( title, description, content, progress) VALUES (?, ?, ?, ?)';
+    db.query(query, [title, description, content, progress], (err, result) => {
+        if (err) {
+            console.error('Error inserting user data:', err);
+        }
+        console.log('User data inserted successfully:', result);
+        res.status(200).send('User data inserted successfully');
+    });
+});
+
+app.put('/users/:id', (req, res) => {
+    const userId = req.params.id;
+    const { bio } = req.body;
+    const sql = "UPDATE users SET bio = ? WHERE id = ?";
+    db.query(sql, [bio, userId], (err, result) => {
+        if (err) {
+            console.error('Error updating user data:', err);
+            return res.status(500).send('Error updating user data');
+        }
+        console.log('User data updated successfully:', result);
+        return res.status(200).send('User data updated successfully');
+    });
+});
+
+
+const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
