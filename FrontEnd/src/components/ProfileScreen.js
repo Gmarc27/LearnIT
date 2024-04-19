@@ -16,7 +16,7 @@ const ProfileScreen = () => {
         const userId = localStorage.getItem("token");
         console.log(userId); // Log the user ID
         const response = await axios.get(
-          `http://localhost:8081/users/${userId}`
+          `https://learnit-bde1.onrender.com/users/${userId}`
         );
         setUserData(response.data);
       } catch (error) {

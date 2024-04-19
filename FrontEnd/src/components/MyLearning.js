@@ -75,7 +75,7 @@ function MyLearning() {
       };
 
       const response = await axios.post(
-        "http://localhost:8081/addcourse",
+        "https://learnit-bde1.onrender.com/addcourse",
         courseData
       );
 
