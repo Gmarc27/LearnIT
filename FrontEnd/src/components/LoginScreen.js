@@ -15,14 +15,14 @@ const LoginScreen = () => {
   };
 
   const handleHome = (e) => {
-    navigate('/');
+    navigate('/LearnIT');
 };
   
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
   
     try {
-      const response = await axios.post('https://learnit2024.onrender.com/LoginScreen', { email, password });
+      const response = await axios.post('http://localhost:8081/LoginScreen', { email, password });
       if (response.data.message === "Login Successfully") {
         console.log(response.data.userId);
         localStorage.setItem('token', response.data.userId);

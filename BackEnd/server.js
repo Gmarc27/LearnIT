@@ -7,10 +7,10 @@ app.use(cors());
 app.use(express.json()); // Add JSON parsing middleware
 
 const db = mysql.createConnection({
-    host: "sql6.freesqldatabase.com",
-    user: 'sql6699810',
-    password: 'hPlpRvY1DL',
-    database: 'sql6699810'
+    host: "localhost",
+    user: 'root',
+    password: '',
+    database: 'learnit'
 });
 
 
@@ -37,6 +37,17 @@ app.get('/users', (req, res) => {
     });
 });
 
+app.get('/course', (req, res) => {   
+    const sql = "SELECT * FROM course";
+    db.query(sql, (err, data) => {
+        if (err) {
+            console.error('Error fetching users:', err);
+            return res.status(500).json({ error: 'Error fetching users' });
+        }
+        return res.json(data);
+    });
+});
+
 app.get('/users/:userId', (req, res) => {
     const userId = req.params.userId;
     const sql = "SELECT * FROM users WHERE ID = ?";
@@ -52,6 +63,23 @@ app.get('/users/:userId', (req, res) => {
         }
     });
 });
+
+app.get('/courses/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const sql = "SELECT * FROM course WHERE ID = ?"; // Assuming the ID column in the course table is a foreign key referencing the ID column in the users table
+    db.query(sql, [userId], (err, data) => {
+        if (err) {
+            console.error('Error fetching course data:', err);
+            return res.status(500).json({ error: 'Error fetching course data' });
+        }
+        if (data.length > 0) {
+            return res.json(data); // Return course data
+        } else {
+            return res.status(404).json({ error: 'No courses found for this user' }); // No courses found
+        }
+    });
+});
+
 
 app.post('/LoginScreen', (req, res) => {
     const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
@@ -83,14 +111,15 @@ app.post('/SignupScreen', (req, res) => {
 
 
 app.post('/addcourse', (req, res) => {
-    const { title, description, content, progress } = req.body;
-    const query = 'INSERT INTO course ( title, description, content, progress) VALUES (?, ?, ?, ?)';
-    db.query(query, [title, description, content, progress], (err, result) => {
+    const { title, description, content, progress, ID } = req.body;
+    const query = 'INSERT INTO course (title, description, content, progress, ID) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [title, description, content, progress, ID], (err, result) => {
         if (err) {
-            console.error('Error inserting user data:', err);
+            console.error('Error inserting course data:', err);
+            return res.status(500).send('Error inserting course data');
         }
-        console.log('User data inserted successfully:', result);
-        res.status(200).send('User data inserted successfully');
+        console.log('Course data inserted successfully:', result);
+        res.status(200).send('Course data inserted successfully');
     });
 });
 
@@ -109,7 +138,7 @@ app.put('/users/:id', (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
