@@ -22,7 +22,7 @@ const LoginScreen = () => {
     e.preventDefault(); // Prevent default form submission behavior
   
     try {
-      const response = await axios.post('https://learnit.onrender.com/LoginScreen', { email, password });
+      const response = await axios.post('https://learnit-bde1.onrender.com/LoginScreen', { email, password });
       if (response.data.message === "Login Successfully") {
         console.log(response.data.userId);
         localStorage.setItem('token', response.data.userId);
