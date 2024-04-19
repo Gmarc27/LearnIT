@@ -7,12 +7,11 @@ app.use(cors());
 app.use(express.json()); // Add JSON parsing middleware
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: 'root',
-    password: '',
-    database: 'learnit'
+    host: "sql6.freesqldatabase.com",
+    user: 'sql6699810',
+    password: 'hPlpRvY1DL',
+    database: 'sql6699810'
 });
-
 
 db.connect((err) => {
     if (err) {
@@ -138,7 +137,7 @@ app.put('/users/:id', (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
