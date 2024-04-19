@@ -34,18 +34,18 @@ function MyLearning() {
         }
         console.log(userId); // Log the user ID
         const userResponse = await axios.get(
-          `http://localhost:8081/users/${userId}`
+          `https://learnit-bde1.onrender.com/users/${userId}`
         );
-        const courseResponse = await axios.get(`http://localhost:8081/course`);
+        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
         const userCoursesResponse = await axios.get(
-          `http://localhost:8081/courses/${userId}`
+          `https://learnit-bde1.onrender.com/courses/${userId}`
         );
         setUserData(userResponse.data);
         setResponseCourses(courseResponse.data);
         setResponseCourseData(userCoursesResponse.data);
         
         if (userData && userData.ID) {
-          const userCoursesResponse = await axios.get(`http://localhost:8081/courses/${userId}`);
+          const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
           if (userCoursesResponse.data) {
             setResponseCourseData(userCoursesResponse.data);
           } else {
