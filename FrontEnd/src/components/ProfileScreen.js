@@ -30,7 +30,7 @@ const ProfileScreen = () => {
   const handleSaveBio = async () => {
     try {
       const userId = localStorage.getItem("token");
-      await axios.put(`http://localhost:8081/users/${userId}`, { bio: newBio });
+      await axios.put(`https://learnit-bde1.onrender.com/users/${userId}`, { bio: newBio });
       setUserData({ ...userData, bio: newBio }); // Update the bio in the local state
       setEditingBio(false); // Exit editing mode
     } catch (error) {
