@@ -91,7 +91,7 @@ app.post('/LoginScreen', (req, res) => {
             return res.json("No Record")
           }
     })
-})
+});
 
 app.post('/SignupScreen', (req, res) => {
     const { studentID, email, firstName, lastName, password } = req.body;
