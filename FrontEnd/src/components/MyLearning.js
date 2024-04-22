@@ -33,31 +33,27 @@ function MyLearning() {
           return;
         }
         console.log(userId); // Log the user ID
-        const userResponse = await axios.get(
-          `https://learnit-bde1.onrender.com/users/${userId}`
-        );
-        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
-        const userCoursesResponse = await axios.get(
-          `https://learnit-bde1.onrender.com/courses/${userId}`
-        );
+  
+        // Fetch user data
+        const userResponse = await axios.get(`https://learnit-bde1.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
+  
+        // Fetch general course data
+        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
         setResponseCourses(courseResponse.data);
-        setResponseCourseData(userCoursesResponse.data);
-        
-        if (userData && userData.ID) {
-          const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
-          if (userCoursesResponse.data) {
-            setResponseCourseData(userCoursesResponse.data);
-          } else {
-            console.log("No courses found for the user");
-            // Handle the case where no courses are found for the user
-          }
+  
+        // Fetch user's enrolled courses data
+        const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
+        if (userCoursesResponse.data) {
+          setResponseCourseData(userCoursesResponse.data);
+        } else {
+          console.log("No courses found for the user");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-
+  
     fetchUserData();
   }, [userData]); // Add userData as a dependency
 
