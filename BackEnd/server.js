@@ -7,10 +7,10 @@ app.use(cors());
 app.use(express.json()); // Add JSON parsing middleware
 
 const db = mysql.createConnection({
-    host: "sql6.freesqldatabase.com",
-    user: 'sql6699810',
+    host: "localhost",
+    user: 'id22073925_learnit2024',
     password: 'hPlpRvY1DL',
-    database: 'sql6699810'
+    database: 'id22073925_learnit2024'
 });
 
 db.connect((err) => {

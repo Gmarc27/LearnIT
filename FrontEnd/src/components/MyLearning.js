@@ -198,25 +198,31 @@ function MyLearning() {
           </div>
         )}
         <div style={styles.containerOutside}>
+      {responseCourseData && (
           <div style={styles.container}>
-            {responseCourseData && (
-              <div>
-                <img
-                  src={responseCourseData.content}
-                  alt={responseCourseData.title}
-                />
-                <div className="courseTitle">{responseCourseData.title}</div>
-                <div className="courseDescription">
-                  {responseCourseData.description}
-                </div>
-                <progress
-                  value={responseCourseData.progress}
-                  className="progressBar"
-                  max={100}
-                ></progress>
-              </div>
-            )}
-          </div>
+          {responseCourseData.map(course => (
+             <div
+             key={course.courseID} // Add key prop
+             style={styles.boxcontainer}
+           >
+             <div
+               style={styles.coursecontainer}
+               onClick={() => handleViewContent(course.content)}
+             >
+               <img
+                 src={course.content}
+                 alt={course.title}
+                 style={styles.courseImage}
+               />
+               <div className="courseTitle">{course.title}</div>
+               <div className="courseDescription">
+                 {course.description}
+               </div>
+             </div>
+           </div>
+          ))}
+        </div>
+      )} 
         </div>
       </div>
     </div>
@@ -232,7 +238,7 @@ const styles = {
     position: "relative",
     height: "auto",
     justifyContent: "space-between",
-    wwidth: "200vh",
+    alignItems: 'center',
   },
 
   nav: {
@@ -256,6 +262,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
   },
 
   coursecontainer: {
@@ -268,6 +275,7 @@ const styles = {
     padding: "20px",
     borderRadius: "15px",
     boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.4)",
+    height: '40vh'
   },
 
   courseImage: {
@@ -323,6 +331,15 @@ const styles = {
     fontSize: "10px",
     justifyContent: "space-between",
   },
+
+  boxcontainer: {
+    display: "flex",
+    width: '30vh',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+
 };
 
 export default MyLearning;
