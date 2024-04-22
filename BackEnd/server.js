@@ -136,6 +136,22 @@ app.put('/users/:id', (req, res) => {
     });
 });
 
+app.get('/courses/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const sql = "SELECT * FROM course WHERE ID = ?"; // Assuming the ID column in the course table is a foreign key referencing the ID column in the users table
+    db.query(sql, [userId], (err, data) => {
+        if (err) {
+            console.error('Error fetching course data:', err);
+            return res.status(500).json({ error: 'Error fetching course data' });
+        }
+        if (data.length > 0) {
+            return res.json(data); // Return course data
+        } else {
+            return res.status(404).json({ error: 'No courses found for this user' }); // No courses found
+        }
+    });
+});
+
 
 const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
