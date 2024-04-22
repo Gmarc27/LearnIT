@@ -17,7 +17,7 @@ const LoginScreen = () => {
   const handleHome = (e) => {
     navigate('/LearnIT');
 };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
   
@@ -59,8 +59,7 @@ const LoginScreen = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span>{passwordError}</span>
-              
+                <div>{error}</div>
               <button 
               style={styles.Loginbutton} 
               onMouseEnter={(e) => {
