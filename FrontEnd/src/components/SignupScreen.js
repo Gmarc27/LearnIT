@@ -19,7 +19,7 @@ const SignupScreen = () => {
 
     const handleSignup = async () => {
         try {
-            const response = await fetch('https://learnit-bde1.onrender.com/SignupScreen', { // Match the backend endpoint
+            const response = await fetch('http://localhost:8000/SignupScreen', { // Match the backend endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

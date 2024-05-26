@@ -6,6 +6,13 @@ import Home from './components/Home';
 import LoginScreen from './components/LoginScreen';
 import SignupScreen from './components/SignupScreen';
 import MyLearning from './components/MyLearning';
+import HtmlScreen from './MyLearning/HtmlScreen';
+import CssScreen from  './MyLearning/CssScreen';
+import Introduction from './MyLearning/HTML/Introduction';
+import Editors from './MyLearning/HTML/Editors';
+import Basic from './MyLearning/HTML/Basic';
+import HtmlQuiz from './MyLearning/HTML/HtmlQuiz';
+import Results from './MyLearning/HTML/Results';
 
 function App() {
   return (
@@ -17,6 +24,13 @@ function App() {
         <Route path="/LoginScreen" element={<LoginScreen />} />
         <Route path="/SignupScreen" element={<SignupScreen />} />
         <Route path="/MyLearning" element={<MyLearning />} />
+        <Route path="/MyLearning/HTML" element={<HtmlScreen />} />
+            <Route path="/MyLearning/HTML/Introduction" element={<Introduction />} />
+            <Route path="/MyLearning/HTML/Editors" element={<Editors />} />
+            <Route path="/MyLearning/HTML/Basic" element={<Basic />} />
+            <Route path="/MyLearning/HTML/Quiz" element={<HtmlQuiz />} />
+            <Route path="/MyLearning/HTML/Results" element={<Results />} />
+        <Route path="/MyLearning/CSS" element={<CssScreen />} />
       </Routes>
     </Router>
   );

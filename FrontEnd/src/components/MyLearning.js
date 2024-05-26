@@ -35,15 +35,15 @@ function MyLearning() {
         console.log(userId); // Log the user ID
   
         // Fetch user data
-        const userResponse = await axios.get(`https://learnit-bde1.onrender.com/users/${userId}`);
+        const userResponse = await axios.get(`http://localhost:8000/users/${userId}`);
         setUserData(userResponse.data);
   
         // Fetch general course data
-        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
+        const courseResponse = await axios.get(`http://localhost:8000/course`);
         setResponseCourses(courseResponse.data);
   
         // Fetch user's enrolled courses data
-        const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
+        const userCoursesResponse = await axios.get(`http://localhost:8000/courses/${userId}`);
         if (userCoursesResponse.data) {
           setResponseCourseData(userCoursesResponse.data);
         } else {
@@ -71,7 +71,7 @@ function MyLearning() {
       };
 
       const response = await axios.post(
-        "https://learnit-bde1.onrender.com/addcourse",
+        "http://localhost:8000/addcourse",
         courseData
       );
 
@@ -86,8 +86,8 @@ function MyLearning() {
     }
   };
 
-  const handleViewContent = (content) => {
-    // Navigate to CourseContentScreen passing the content
+  const handleViewContent = (courseId) => {
+    navigate(`/MyLearning/${courseId}`);
   };
 
   const courses = [
@@ -162,63 +162,57 @@ function MyLearning() {
                 <MdClose />
               </button>
               <div style={styles.addCourse}>
-                {courses.map((course) => (
+              {courses.map((course) => (
+                <div
+                  key={course.courseID}
+                  onClick={() => handleAddCourse(
+                    course.title,
+                    course.description,
+                    course.content
+                  )}
+                >
                   <div
-                    key={course.courseID} // Add key prop
-                    onClick={() =>
-                      handleAddCourse(
-                        course.title,
-                        course.description,
-                        course.content
-                      )
-                    }
+                    style={styles.coursecontainer}
+                    onClick={() => handleViewContent(course.title)} // Corrected here
                   >
-                    <div
-                      style={styles.coursecontainer}
-                      onClick={() => handleViewContent(course.content)}
-                    >
-                      <img
-                        src={course.content}
-                        alt={course.title}
-                        style={styles.courseImage}
-                      />
-                      <div className="courseTitle">{course.title}</div>
-                      <div className="courseDescription">
-                        {course.description}
-                      </div>
-                    </div>
+                    <img
+                      src={course.content}
+                      alt={course.title}
+                      style={styles.courseImage}
+                    />
+                    <div className="courseTitle">{course.title}</div>
+                    <div className="courseDescription">{course.description}</div>
                   </div>
-                ))}
+                </div>
+              ))}
               </div>
             </div>
           </div>
         )}
         <div style={styles.containerOutside}>
-      {responseCourseData && (
-          <div style={styles.container}>
-          {responseCourseData.map(course => (
-             <div
-             key={course.courseID} // Add key prop
-             style={styles.boxcontainer}
-           >
-             <div
-               style={styles.coursecontainer}
-               onClick={() => handleViewContent(course.content)}
-             >
-               <img
-                 src={course.content}
-                 alt={course.title}
-                 style={styles.courseImage}
-               />
-               <div className="courseTitle">{course.title}</div>
-               <div className="courseDescription">
-                 {course.description}
-               </div>
-             </div>
-           </div>
-          ))}
-        </div>
-      )} 
+        {responseCourseData && (
+            <div style={styles.container}>
+              {responseCourseData.map(course => (
+                <div
+                  key={course.courseID} // Add key prop
+                  style={styles.boxcontainer}
+                >
+                  <div
+                    style={styles.coursecontainer}
+                    onClick={() => handleViewContent(course.title)} // Corrected here
+                  >
+                    <img
+                      src={course.content}
+                      alt={course.title}
+                      style={styles.courseImage}
+                    />
+                    <div className="courseTitle">{course.title}</div>
+                    <div className="courseDescription">{course.description}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )} 
         </div>
       </div>
     </div>
@@ -259,6 +253,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    fontSize: '10px',
   },
 
   coursecontainer: {
@@ -330,7 +325,7 @@ const styles = {
 
   boxcontainer: {
     display: "flex",
-    width: '30vh',
+    width: '25vh',
     alignItems: 'center',
     justifyContent: 'center',
   }
