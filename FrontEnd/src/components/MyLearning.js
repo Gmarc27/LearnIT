@@ -35,15 +35,15 @@ function MyLearning() {
         console.log(userId); // Log the user ID
   
         // Fetch user data
-        const userResponse = await axios.get(`http://localhost:8000/users/${userId}`);
+        const userResponse = await axios.get(`https://learnit-bde1.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
   
         // Fetch general course data
-        const courseResponse = await axios.get(`http://localhost:8000/course`);
+        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
         setResponseCourses(courseResponse.data);
   
         // Fetch user's enrolled courses data
-        const userCoursesResponse = await axios.get(`http://localhost:8000/courses/${userId}`);
+        const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
         if (userCoursesResponse.data) {
           setResponseCourseData(userCoursesResponse.data);
         } else {
@@ -71,7 +71,7 @@ function MyLearning() {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/addcourse",
+        "https://learnit-bde1.onrender.com/addcourse",
         courseData
       );
 
