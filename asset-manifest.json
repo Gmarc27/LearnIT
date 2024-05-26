@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/LearnIT/static/css/main.85f7102a.css",
-    "main.js": "/LearnIT/static/js/main.53a6e335.js",
+    "main.js": "/LearnIT/static/js/main.1977bf82.js",
     "static/js/453.1118f7d6.chunk.js": "/LearnIT/static/js/453.1118f7d6.chunk.js",
     "static/media/course5.png": "/LearnIT/static/media/course5.64f637357bce0ccc8384.png",
     "static/media/course3.png": "/LearnIT/static/media/course3.130c0ecd57833da6f75c.png",
@@ -11,11 +11,11 @@
     "static/media/profile.jpg": "/LearnIT/static/media/profile.0bfb883dddf5359d22bd.jpg",
     "index.html": "/LearnIT/index.html",
     "main.85f7102a.css.map": "/LearnIT/static/css/main.85f7102a.css.map",
-    "main.53a6e335.js.map": "/LearnIT/static/js/main.53a6e335.js.map",
+    "main.1977bf82.js.map": "/LearnIT/static/js/main.1977bf82.js.map",
     "453.1118f7d6.chunk.js.map": "/LearnIT/static/js/453.1118f7d6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85f7102a.css",
-    "static/js/main.53a6e335.js"
+    "static/js/main.1977bf82.js"
   ]
 }
