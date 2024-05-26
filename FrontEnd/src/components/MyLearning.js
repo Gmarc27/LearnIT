@@ -59,15 +59,13 @@ function MyLearning() {
 
   const handleAddCourse = async (title, description, content) => {
     try {
-
       const userId = localStorage.getItem("token");
-      // Check if userData is available, otherwise set ID to null
       const courseData = {
         title: title,
         description: description,
-        content: String(content), // Assuming content is "course1image"
+        content: String(content),
         progress: 0, // Set initial progress to 0
-        ID: userId, // Set ID based on userData, or null if not available
+        ID: userId,
       };
 
       const response = await axios.post(
@@ -76,11 +74,10 @@ function MyLearning() {
       );
 
       if (response.status === 201) {
-        // Course added successfully
         console.log("Course added successfully:", response.data);
       }
 
-      navigate("/MyLearning");
+      // No navigation here
     } catch (error) {
       console.error("Error adding course:", error);
     }
