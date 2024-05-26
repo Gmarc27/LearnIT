@@ -170,7 +170,6 @@ function MyLearning() {
                 >
                   <div
                     style={styles.coursecontainer}
-                    onClick={() => handleViewContent(course.title)} // Corrected here
                   >
                     <img
                       src={course.content}
