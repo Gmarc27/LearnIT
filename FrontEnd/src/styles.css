@@ -1,4 +1,11 @@
 /* styles.css */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
 .page {
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -22,7 +29,7 @@
 
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100vh;
   }
   
@@ -51,6 +58,14 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+
+  .header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #faf8f8;
   }
   
   .profileImage {
@@ -100,32 +115,37 @@
     margin-left: 10px;
   }
   
-  .courseItem {
-    margin-bottom: 20px;
+  .course-container {
+    display: flex;;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
   }
-  
-  .courseTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
+
+  .courseadd-container {
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    position: relative;
   }
-  
-  .courseDescription {
-    margin-bottom: 10px;
-  }
-  
-  .progressBar {
-    height: 30px;
-    width: 100%;
-    margin-bottom: 10px;
+
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   
   .courseImage {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 10px;
-    border-radius: 100px;
+    border-radius: 0;
     padding: 5px;
-    background: gray;
+  }
+
+  .courseDescription {
+    font-size: small;
   }
   
   .viewContentButton {
@@ -231,3 +251,456 @@
     border: 1px solid grey;
     padding-left: 8px;
   }
+
+
+  .container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 100vh;
+    position: relative;
+  }
+  
+  .nav {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    cursor: pointer;
+    height: 75px;
+    width: 175px;
+  }
+
+  .navR {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+    height: 75px;
+    width: 175px;
+  }
+
+  .navin {
+    display: flex;
+    align-items: center;
+  }
+
+  .logoimg {
+    display: flex;
+    position: relative;
+    left: 0;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+  }
+
+  .logoimg img {
+    height: 100%; /* Ensures the image fits the container */
+    width: 100%;  /* Ensures the image fits the container */
+    border-radius: 40%; /* Makes the image circular */
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .logotext {
+    display: flex;
+    position: relative;
+    color:#28B498;
+    font-size: large;
+    font-weight: 800;
+    font-family:Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    margin-left: 20px;
+    text-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+  
+  .login {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 8;
+    height: 100%;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .signup {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 4;
+    height: 100%;
+    background-color: #28B498;
+    color: white;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .input {
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    margin: 10px;
+    background-color: #EDF5F3;
+    width: 50vh;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+  }
+  
+  .Loginbutton {
+    height: 50px;
+    width: 50vh;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 0;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    margin-top: 20px;
+    background-color: #28B498;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .Signupbutton {
+    height: 50px;
+    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 0;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+  }
+
+  .ForgotButton {
+    margin-top: 20px;
+    color: #28B498;
+    cursor: pointer;
+    font-size: larger;
+  }
+
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    width: 75vh;
+    height: 6vh;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border: 0;
+  }
+  
+  .search-bar button {
+    padding: 0.5rem 1rem;
+    background-color: #28B498;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 6vh;
+    width: 120px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .search-bar .icon {
+    padding: 0.5rem 1rem;
+    background-color: #28B498;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 4vh;
+    width: 25px;
+    font-size: 1.5rem; 
+    margin-right: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  
+  
+  .user-info {
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
+    margin-left: -100px;
+  }
+
+  div .icon {
+    margin-right: 15px;
+    color:#28B498;
+  }
+
+  .user-info img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+  
+  
+
+  /* Specific section styles */
+
+  .dashboard{
+    font-size: 10px;
+    position: inherit;
+    border: 0;
+  }
+
+  .dashboard h2 {
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .dashboard .dashboard-navigation {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 76vh;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+
+  .dashboard div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  
+  .notifications,
+  .resources,
+  .quiz-history,
+  .support {
+    /* Add common styles for these sections */
+    .description p {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .resources h2{
+    color: #28B498;
+  }
+  
+  .resources .achievements,
+  .quiz-history .achievements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .resources .achievements span:first-child,
+  .quiz-history .achievements span:first-child {
+    font-weight: bold;
+  }
+  
+  .resources .achievements a,
+  .quiz-history .achievements a {
+    text-decoration: none;
+    color: #007bff; /* Blue */
+  }
+
+  .achievements{
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    height: auto;
+  }
+
+
+  .achievements .container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: start;
+    width: 100%;
+  }
+
+  .courseTitle {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: #ededed;
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: #28B498;
+    font-weight: 600;
+  }
+
+.boxcontainer {
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, #f0eeee, #59595c);
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  margin: 30px;
+  }
+
+  .courseDescription {
+    border-radius: 5px;
+    font-size: 10px;
+    width: 80%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .quiz-history .trophy {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .trophy img {
+    width: 70px; /* Adjust image size as needed */
+    height: 70px;
+    margin: 5px;
+  }
+  
+  .user-actions {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .user-actions p {
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .user-actions a,
+  .user-actions button {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .main {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to keep columns side by side */
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    flex-direction: row;
+    background-color: #faf8f8;
+  }
+  
+  .main section {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px; 
+  }
+
+  .dashboard {
+    flex-grow: 2;
+    max-width: 20%;
+    min-width: 20%;
+    min-height: 80vh;
+  }
+  
+  .resources {
+    flex-grow: 8;
+    max-width: 60%;
+    max-width: 60%;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .rside-bar {
+    flex-grow: 2;
+    max-width: 20%;
+    min-width: 20%;
+  }
+  .current-page{
+    background-color: #28B498;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 170px;
+    display: flex;
+  }
+
+   .current-icon{
+    margin-right: 10px;
+
+  }
+
+  
+.trophy {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.users-online {
+  height: 100px;
+  min-width: 100px;
+}
+
+.Medal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.achievements-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.Topics {
+  display: flex;
+  height: 100px;
+  width: 200px;
+  border-radius: 5px;
+  background-color: #28B498;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.topic-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50vh;
+}

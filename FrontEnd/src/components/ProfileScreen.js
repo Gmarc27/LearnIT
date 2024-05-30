@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdSettings, MdExitToApp } from "react-icons/md"; // Using icons from react-icons
 import profileImage from "../assets/profile.jpg"; // Import profile image
+import Logo from '../assets/Logo.png';
 
 const ProfileScreen = () => {
   const [userData, setUserData] = useState(null);
@@ -57,17 +58,17 @@ const ProfileScreen = () => {
 
   return (
     <div>
-      <div style={styles.nav} onClick={handleHome}>
-        {" "}
-        LearnIT{" "}
-      </div>
+       <div className='nav'>
+            <div className='logoimg' onClick={handleHome}><img src={Logo} alt="hehe" /></div>
+            <div className='logotext'><div>LearnIT</div></div>
+        </div>
       <div style={styles.container}>
         <div style={styles.profilecontainer}>
           {userData && (
             <div style={styles.profilecontainer2}>
               <img src={profileImage} alt="Profile" className="profileImage" />
               <div className="profileTitle">
-                {userData.firstname} {userData.lastname}
+                {userData.firstName} {userData.lastName}
               </div>
               <div style={styles.profiledescription}>
                 <div style={styles.desc}>Student ID: {userData.studentID}</div>

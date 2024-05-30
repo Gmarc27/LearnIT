@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import Logo from '../assets/Logo.png';
 import course1Image from "../assets/course1.png";
 import course2Image from "../assets/course2.png";
 import course3Image from "../assets/course3.png";
 import course4Image from "../assets/course4.png";
 import course5Image from "../assets/course5.png";
+import Medal1 from "../assets/Medal1.png";
+import Medal2 from "../assets/Medal2.png";
+import Medal3 from "../assets/Medal3.png";
+import Profile from "../assets/profile.jpg";
 
 function MyLearning() {
   const [courseProgress, setCourseProgress] = useState({});
@@ -15,6 +22,10 @@ function MyLearning() {
   const [responseCourses, setResponseCourses] = useState(null);
   const [showContent, setShowContent] = useState(false);
   const navigate = useNavigate();
+
+  const handleHome = () => {
+    navigate("/MyLearning");
+  }
 
   const handleProfile = () => {
     navigate("/ProfileScreen");
@@ -32,15 +43,10 @@ function MyLearning() {
           console.error("User ID not found in localStorage");
           return;
         }
-        console.log(userId); // Log the user ID
   
         // Fetch user data
         const userResponse = await axios.get(`https://learnit-bde1.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
-  
-        // Fetch general course data
-        const courseResponse = await axios.get(`https://learnit-bde1.onrender.com/course`);
-        setResponseCourses(courseResponse.data);
   
         // Fetch user's enrolled courses data
         const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
@@ -55,17 +61,17 @@ function MyLearning() {
     };
   
     fetchUserData();
-  }, [userData]); // Add userData as a dependency
+  }, [userData]);  // Add userData as a dependency
 
-  const handleAddCourse = async (title, description, content) => {
+  const handleAddCourse = async ( title, description, content) => {
     try {
       const userId = localStorage.getItem("token");
       const courseData = {
         title: title,
         description: description,
-        content: String(content),
+        content: content,
         progress: 0, // Set initial progress to 0
-        ID: userId,
+        userID: userId,
       };
 
       const response = await axios.post(
@@ -138,27 +144,52 @@ function MyLearning() {
       ...prevProgress,
       [courseId]: progress,
     }));
-  };
+  }; 
 
   return (
-    <div>
-      <div style={styles.nav}>
-        <div style={styles.profile} onClick={handleProfile}>
-          Profile
+    <div id="mylearning">
+      <header className="header">
+        <div className='navin'>
+            <div className='logoimg' onClick={handleHome}><img src={Logo} alt="hehe" /></div>
+            <div className='logotext'><div>LearnIT</div></div>
         </div>
-      </div>
-      <div className="content">
-        <div className="title">My Courses</div>
-        <div className="addButton" onClick={toggleContent}>
-          <span className="addButtonLabel">Add Topics</span>
+        <div className="search-bar">
+          <input type="text" placeholder="Search Quiz" />
+          <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
+          <button onClick={toggleContent} >Add Course</button>
         </div>
-        {showContent && (
-          <div style={styles.containerAdd}>
-            <div style={styles.addTopics}>
-              <button onClick={toggleContent} style={styles.mdClose}>
+        <div className="user-info">
+          <img src={Profile}></img>
+          <span>Gmarc Collados</span>
+        </div>
+      </header>
+
+      <main className="main">
+      <section className="dashboard">
+            <div className="dashboard-navigation">
+                <div>
+                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
+                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                </div>
+                <div>
+                <h2>Contact Us</h2>
+                <h2 className="logout"><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                </div>
+            </div>
+        </section>
+        <section className="resources">
+          <h2>Resources</h2>
+          {showContent && (
+
+          <div className  = "courseadd-container">
+              <div className="close-button">
+            <button onClick={toggleContent} className  = "mdClose">
                 <MdClose />
               </button>
-              <div style={styles.addCourse}>
+              </div>
+              <div className  = "course-container">
               {courses.map((course) => (
                 <div
                   key={course.courseID}
@@ -169,12 +200,12 @@ function MyLearning() {
                   )}
                 >
                   <div
-                    style={styles.coursecontainer}
+                    className  = "coursecontainer"
                   >
                     <img
                       src={course.content}
                       alt={course.title}
-                      style={styles.courseImage}
+                      className  = "courseImage"
                     />
                     <div className="courseTitle">{course.title}</div>
                     <div className="courseDescription">{course.description}</div>
@@ -183,150 +214,54 @@ function MyLearning() {
               ))}
               </div>
             </div>
-          </div>
         )}
-        <div style={styles.containerOutside}>
-        {responseCourseData && (
-            <div style={styles.container}>
+        
+          {responseCourseData && (
+            <div className="course-container">
               {responseCourseData.map(course => (
-                <div
-                  key={course.courseID} // Add key prop
-                  style={styles.boxcontainer}
-                >
-                  <div
-                    style={styles.coursecontainer}
-                    onClick={() => handleViewContent(course.title)} // Corrected here
-                  >
+                <div key={course._id} className="boxcontainer"  onClick={() => handleViewContent(course.title)}>  
+                  <div className="courseTitle">{course.title}</div>
                     <img
                       src={course.content}
                       alt={course.title}
-                      style={styles.courseImage}
+                      className="courseImage"
                     />
-                    <div className="courseTitle">{course.title}</div>
                     <div className="courseDescription">{course.description}</div>
-                  </div>
                 </div>
               ))}
             </div>
-          )} 
-        </div>
-      </div>
+          )}
+    
+        </section>
+          
+        <section className="rside-bar">
+          <div className="users-online"> 
+              <span>Other users online</span>
+          </div>
+          <div className="achievements-text">
+              <span>Achievements</span>
+              <a href="#">View All</a>
+          </div>
+          <div className="trophy">
+            <div className="Medal">
+            <img src={Medal1} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal2} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal3} alt="Medal" />
+            <span>Medal</span>
+            </div>
+          </div>
+        </section>
+        
+      </main>
     </div>
   );
 }
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: "10vh",
-    position: "relative",
-    height: "auto",
-    justifyContent: "space-between",
-    alignItems: 'center',
-  },
-
-  nav: {
-    display: "flex",
-    position: "fixed",
-    top: "0",
-    borderBottom: "1px solid gray",
-    height: "56px",
-    width: "100%",
-    background: "white",
-  },
-
-  profile: {
-    cursor: "pointer",
-    right: "0",
-    display: "flex",
-    position: "absolute",
-  },
-
-  containerOutside: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    fontSize: '10px',
-  },
-
-  coursecontainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    margin: "5px",
-    padding: "20px",
-    borderRadius: "15px",
-    boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.4)",
-    height: '40vh'
-  },
-
-  courseImage: {
-    width: "100px",
-    height: "100px",
-    marginBottom: "10px",
-    borderRadius: "100px",
-    padding: "5px",
-    background: "gray",
-  },
-
-  addTopics: {
-    width: "90%",
-    padding: "10vh",
-    height: "70vh",
-    position: "absolute",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    border: "1px solid black",
-    background: "white",
-    zIndex: "1",
-    margin: "10vh",
-    borderRadius: "15px",
-  },
-
-  containerAdd: {
-    display: "flex",
-    backdropFilter: "blur(2px)", // Adjust the blur radius as needed
-    WebkitBackdropFilter: "blur(2px)", // For Safari support
-    backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the opacity as needed
-    zIndex: "1",
-    position: "absolute",
-    marginTop: "56px",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-
-  mdClose: {
-    position: "absolute",
-    display: "flex",
-    top: 5,
-    right: 5,
-    background: "red",
-    borderRadius: "100px",
-  },
-
-  addCourse: {
-    display: "flex",
-    height: "100%",
-    fontSize: "10px",
-    justifyContent: "space-between",
-  },
-
-  boxcontainer: {
-    display: "flex",
-    width: '25vh',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-
-
-};
 
 export default MyLearning;

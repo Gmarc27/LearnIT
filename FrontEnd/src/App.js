@@ -13,6 +13,8 @@ import Editors from './MyLearning/HTML/Editors';
 import Basic from './MyLearning/HTML/Basic';
 import HtmlQuiz from './MyLearning/HTML/HtmlQuiz';
 import Results from './MyLearning/HTML/Results';
+import ResetPassword from './components/ResetPassword';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ProfileScreen" element={<ProfileScreen />} />
         <Route path="/LoginScreen" element={<LoginScreen />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/SignupScreen" element={<SignupScreen />} />
         <Route path="/MyLearning" element={<MyLearning />} />
         <Route path="/MyLearning/HTML" element={<HtmlScreen />} />
