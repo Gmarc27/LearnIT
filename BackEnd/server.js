@@ -194,7 +194,7 @@ app.put('/users/:id', async (req, res) => {
     const { firstName, lastName, age, birthday, course, school, bio } = req.body;
     
     try {
-      await User.findByIdAndUpdate(userId, { 
+      const userData = {
         firstName, 
         lastName, 
         age, 
@@ -202,13 +202,19 @@ app.put('/users/:id', async (req, res) => {
         course, 
         school, 
         bio 
-      });
+      };
+
+      // Exclude the _id field from the update operation
+      delete userData._id;
+
+      await User.findByIdAndUpdate(userId, userData);
       res.status(200).json({ message: 'User data updated successfully' });
     } catch (error) {
       console.error('Error updating user data:', error);
       res.status(500).json({ error: 'Error updating user data' });
     }
-  });
+});
+
 
 app.post('/ForgotPassword', async (req, res) => {
     const { email } = req.body;
