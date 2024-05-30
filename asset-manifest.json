@@ -1,21 +1,25 @@
 {
   "files": {
-    "main.css": "/LearnIT/static/css/main.85f7102a.css",
-    "main.js": "/LearnIT/static/js/main.10aba01f.js",
+    "main.css": "/LearnIT/static/css/main.47175444.css",
+    "main.js": "/LearnIT/static/js/main.9b741e15.js",
     "static/js/453.1118f7d6.chunk.js": "/LearnIT/static/js/453.1118f7d6.chunk.js",
     "static/media/course5.png": "/LearnIT/static/media/course5.64f637357bce0ccc8384.png",
-    "static/media/course3.png": "/LearnIT/static/media/course3.130c0ecd57833da6f75c.png",
-    "static/media/course1.png": "/LearnIT/static/media/course1.89c815e1a85fe0233dc0.png",
-    "static/media/course4.png": "/LearnIT/static/media/course4.906404c9875d2944e325.png",
-    "static/media/course2.png": "/LearnIT/static/media/course2.5c4ea5b481a035e6c30b.png",
+    "static/media/Logo.png": "/LearnIT/static/media/Logo.599845fe7f4719aa2a6e.png",
+    "static/media/Medal3.png": "/LearnIT/static/media/Medal3.f8d5d020d41a72992f44.png",
+    "static/media/Medal2.png": "/LearnIT/static/media/Medal2.a6de9dd1ca655d82d74e.png",
+    "static/media/Medal1.png": "/LearnIT/static/media/Medal1.96c79df15c2eb2195180.png",
+    "static/media/course4.png": "/LearnIT/static/media/course4.520031e8cff48202542c.png",
+    "static/media/course2.png": "/LearnIT/static/media/course2.2dcd96e17458da30063e.png",
+    "static/media/course3.png": "/LearnIT/static/media/course3.c2f1273feea461bddaf5.png",
+    "static/media/course1.png": "/LearnIT/static/media/course1.6bc7e145e8134c0b5d03.png",
     "static/media/profile.jpg": "/LearnIT/static/media/profile.0bfb883dddf5359d22bd.jpg",
     "index.html": "/LearnIT/index.html",
-    "main.85f7102a.css.map": "/LearnIT/static/css/main.85f7102a.css.map",
-    "main.10aba01f.js.map": "/LearnIT/static/js/main.10aba01f.js.map",
+    "main.47175444.css.map": "/LearnIT/static/css/main.47175444.css.map",
+    "main.9b741e15.js.map": "/LearnIT/static/js/main.9b741e15.js.map",
     "453.1118f7d6.chunk.js.map": "/LearnIT/static/js/453.1118f7d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.85f7102a.css",
-    "static/js/main.10aba01f.js"
+    "static/css/main.47175444.css",
+    "static/js/main.9b741e15.js"
   ]
 }
