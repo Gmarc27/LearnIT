@@ -43,11 +43,11 @@ function MyLearning() {
           console.error("User ID not found in localStorage");
           return;
         }
-  
+
         // Fetch user data
         const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
-  
+
         // Fetch user's enrolled courses data
         const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
         if (userCoursesResponse.data) {
@@ -59,9 +59,13 @@ function MyLearning() {
         console.error("Error fetching user data:", error);
       }
     };
-  
+
     fetchUserData();
-  }, [userData]);  // Add userData as a dependency
+  }, []);  // Empty dependency array ensures this runs only once
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   const handleAddCourse = async ( title, description, content) => {
     try {
@@ -160,7 +164,7 @@ function MyLearning() {
         </div>
         <div className="user-info">
           <img src={Profile}></img>
-          <span>Gmarc Collados</span>
+          <div className="Profile" onClick={handleProfile}>{userData.firstName} {userData.lastName}</div>
         </div>
       </header>
 

@@ -52,6 +52,10 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     password: String,
+    age: { type: Number, default: 0 }, // Default value: 0 for age
+    birthday: { type: Date, default: new Date('2000-01-01') }, // Default value: January 1, 2000 for birthday
+    course: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for course
+    school: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for school
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });

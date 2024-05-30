@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MdSettings, MdExitToApp } from "react-icons/md"; // Using icons from react-icons
-import profileImage from "../assets/profile.jpg"; // Import profile image
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
+import course1Image from "../assets/course1.png";
+import course2Image from "../assets/course2.png";
+import course3Image from "../assets/course3.png";
+import course4Image from "../assets/course4.png";
+import course5Image from "../assets/course5.png";
+import Medal1 from "../assets/Medal1.png";
+import Medal2 from "../assets/Medal2.png";
+import Medal3 from "../assets/Medal3.png";
+import Profile from "../assets/profile.jpg";
 
 const ProfileScreen = () => {
   const [userData, setUserData] = useState(null);
   const [editingBio, setEditingBio] = useState(false); // State to track if bio is being edited
+  const [responseCourseData, setResponseCourseData] = useState(null);
   const [newBio, setNewBio] = useState(""); // State to store the new bio
   const navigate = useNavigate();
 
@@ -15,18 +25,33 @@ const ProfileScreen = () => {
     const fetchUserData = async () => {
       try {
         const userId = localStorage.getItem("token");
-        console.log(userId); // Log the user ID
-        const response = await axios.get(
-          `https://learnit-1-aggl.onrender.com/users/${userId}`
-        );
-        setUserData(response.data);
+        if (!userId) {
+          console.error("User ID not found in localStorage");
+          return;
+        }
+
+        // Fetch user data
+        const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
+        setUserData(userResponse.data);
+
+        // Fetch user's enrolled courses data
+        const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
+        if (userCoursesResponse.data) {
+          setResponseCourseData(userCoursesResponse.data);
+        } else {
+          console.log("No courses found for the user");
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, []);  // Empty dependency array ensures this runs only once
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   const handleSaveBio = async () => {
     try {
@@ -57,158 +82,97 @@ const ProfileScreen = () => {
   };
 
   return (
-    <div>
-       <div className='nav'>
+    <div>     
+<div id="mylearning">
+      <header className="header">
+        <div className='navin'>
             <div className='logoimg' onClick={handleHome}><img src={Logo} alt="hehe" /></div>
             <div className='logotext'><div>LearnIT</div></div>
         </div>
-      <div style={styles.container}>
-        <div style={styles.profilecontainer}>
-          {userData && (
-            <div style={styles.profilecontainer2}>
-              <img src={profileImage} alt="Profile" className="profileImage" />
-              <div className="profileTitle">
-                {userData.firstName} {userData.lastName}
-              </div>
-              <div style={styles.profiledescription}>
-                <div style={styles.desc}>Student ID: {userData.studentID}</div>
-                <div style={styles.desc}>Points: {userData.points}</div>
-                {editingBio ? (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <input
-                      type="text"
-                      value={newBio}
-                      onChange={(e) => setNewBio(e.target.value)}
-                    />
-                    <button onClick={handleSaveBio}>Save</button>
-                  </div>
-                ) : (
-                  <div style={styles.desc}>
-                    <span>Bio: {userData.bio}</span>
-                    <div
-                      style={styles.EditBio}
-                      onClick={() => setEditingBio(true)}
-                      onMouseEnter={(e) => {
-                        e.target.style.boxShadow =
-                          "0px 0px 20px rgba(0, 0, 0, 0.4)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.boxShadow =
-                          "0px 0px 10px rgba(0, 0, 0, 0.2)";
-                      }}
-                    >
-                      Edit Bio
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div
-                style={styles.mylearning}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = "0px 0px 20px rgba(0, 0, 0, 0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.2)";
-                }}
-              >
-                <span style={styles.mylearning} onClick={handleMyLearning}>
-                  Start Learning
-                </span>
-              </div>
+        <div className="search-bar">
+          <input type="text" placeholder="Search Quiz" />
+          <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
+          <button onClick={handleHome}>Add Course</button>
+        </div>
+        <div className="user-info">
+          <img src={Profile}></img>
+          <div className="Profile">{userData.firstName} {userData.lastName}</div>
+        </div>
+      </header>
+
+      <main className="main">
+      <section className="dashboard">
+            <div className="dashboard-navigation">
+                <div>
+                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
+                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                </div>
+                <div>
+                <h2>Contact Us</h2>
+                <h2 className="logout"><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                </div>
             </div>
-          )}
-          <div className="sidebarBottom">
-            <div className="sidebarButton" onClick={handleSettings}>
-              <MdSettings size={24} color="white" />
-              <span className="buttonText">Settings</span>
+        </section>
+
+
+
+        <section className="resources">
+          <h2>PROFILE</h2>
+          <div className="profile-container">
+
+            <div className="profile-stats">
+                <div><img src={Profile}></img></div>
+                <div>{userData.lastName}, {userData.firstName}</div>
+                <div>{userData.studentID}</div>
+                <div> STUDENT </div>
             </div>
-            <div className="sidebarButton" onClick={handleLogout}>
-              <MdExitToApp size={24} color="white" />
-              <span className="buttonText" onClick={handleLogout}>
-                Logout
-              </span>
+            <div className="general-information">
+                <div className="general-container">
+                  <h2>General Information</h2>
+                  <div>Age: {userData.age}</div>
+                  <div>Birthday</div>
+                  <div>Course</div>
+                  <div>School</div>
+                </div>
+                <div className="general-container">
+                  <h2>Bio:</h2>
+                  <div>TEXTEXTTEXTEXTTEXTEXTTEXTEXT</div>
+                </div>
+            </div>
+
+          </div>
+        </section>
+          
+        <section className="rside-bar">
+          <div className="users-online"> 
+              <span>Other users online</span>
+          </div>
+          <div className="achievements-text">
+              <span>Achievements</span>
+              <a href="#">View All</a>
+          </div>
+          <div className="trophy">
+            <div className="Medal">
+            <img src={Medal1} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal2} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal3} alt="Medal" />
+            <span>Medal</span>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+        
+      </main>
+    </div>
+
     </div>
   );
 };
-
-const styles = {
-  container: {
-    display: "flex",
-    height: "93vh",
-    marginTop: "2vh",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-  },
-
-  nav: {
-    display: "flex",
-    position: "fixed",
-    top: "0",
-    left: "0",
-    margin: "10px",
-    padding: "10px",
-    border: "1px solid black",
-    cursor: "pointer",
-  },
-
-  profilecontainer: {
-    display: "flex",
-    padding: "50px",
-    height: "80vh",
-    width: "50%",
-    justifyContent: "center",
-    position: "absolute",
-    borderRadius: "15px",
-    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.8)",
-  },
-
-  profilecontainer2: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-
-  profiledescription: {
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  desc: {
-    padding: "10px",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  mylearning: {
-    display: "flex",
-    width: "100%",
-    height: "50px",
-    backgroundColor: "#28B498",
-    color: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-  },
-
-  EditBio: {
-    display: "flex",
-    backgroundColor: "#28B498",
-    color: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-    marginTop: "5px",
-  },
-};
-
 export default ProfileScreen;

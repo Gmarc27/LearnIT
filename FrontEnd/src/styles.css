@@ -704,3 +704,53 @@ body {
   align-items: center;
   height: 50vh;
 }
+
+.Profile {
+  cursor: pointer;
+}
+
+.profile-stats {
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 30%;
+  align-items: center;
+  background-color: #eeeeee;
+  border-radius: 5px;
+}
+
+.profile-stats img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-stats div {
+  margin-bottom: 10px;
+  font-family:Arial, Helvetica, sans-serif;
+  color: #28B498;
+  font-weight: bold;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: start;
+}
+
+.general-information {
+  display: flex;
+  flex-direction: column;
+}
+
+.general-container {
+  margin: 10px;
+  background-color: #eeeeee;
+  min-width: 65vh;
+  min-height: 25vh;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
