@@ -53,7 +53,14 @@ const userSchema = new mongoose.Schema({
     lastName: String,
     password: String,
     age: { type: Number, default: 0 }, // Default value: 0 for age
-    birthday: { type: Date, default: new Date('2000-01-01') }, // Default value: January 1, 2000 for birthday
+    birthday: { 
+        type: Date, 
+        default: new Date('2000-01-01'), // Default value: January 1, 2000 for birthday
+        get: function() {
+            // Custom getter function to format date as YYYY-MM-DD
+            return this.birthday.toISOString().split('T')[0];
+        }
+    },
     course: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for course
     school: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for school
     resetPasswordToken: String,

@@ -67,6 +67,11 @@ function MyLearning() {
     return <div>Loading...</div>;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove token from localStorage
+    navigate("/LearnIT"); // Redirect to login screen
+  };
+
   const handleAddCourse = async ( title, description, content) => {
     try {
       const userId = localStorage.getItem("token");
@@ -153,8 +158,8 @@ function MyLearning() {
   return (
     <div id="mylearning">
       <header className="header">
-        <div className='navin'>
-            <div className='logoimg' onClick={handleHome}><img src={Logo} alt="hehe" /></div>
+      <div className='navin'  onClick={handleHome}>
+            <div className='logoimg'><img src={Logo} alt="hehe" /></div>
             <div className='logotext'><div>LearnIT</div></div>
         </div>
         <div className="search-bar">
@@ -179,7 +184,7 @@ function MyLearning() {
                 </div>
                 <div>
                 <h2>Contact Us</h2>
-                <h2 className="logout"><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
         </section>

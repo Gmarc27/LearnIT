@@ -1,91 +1,191 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import confetti from "canvas-confetti";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { MdClose } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import Logo from './assets/Logo.png';
+import course1Image from "./assets/course1.png";
+import course2Image from "./assets/course2.png";
+import course3Image from "./assets/course3.png";
+import course4Image from "./assets/course4.png";
+import course5Image from "./assets/course5.png";
+import Medal1 from "./assets/Medal1.png";
+import Medal2 from "./assets/Medal2.png";
+import Medal3 from "./assets/Medal3.png";
+import Profile from "./assets/profile.jpg";
 
-function Results() {
+function Basic() {
+  const [userData, setUserData] = useState(null);
+  const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { score } = location.state;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem("token");
+        if (!userId) {
+          console.error("User ID not found in localStorage");
+          return;
+        }
+  
+        // Fetch user data
+        const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
+        setUserData(userResponse.data);
+  
+        // Fetch user's enrolled courses data
+        const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
+        if (userCoursesResponse.data) {
+          setResponseCourseData(userCoursesResponse.data);
+        } else {
+          console.log("No courses found for the user");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  
+    // Loop confetti every 3 seconds
+    const confettiInterval = setInterval(() => {
+      confetti();
+    }, 3000);
+  
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(confettiInterval);
+  }, []); 
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
+  const handleProfile = () => {
+    navigate("/ProfileScreen");
+  };
+
+  const handleNext = () => {
+    navigate('/MyLearning');
+  };
+
+  const handleHome = () => {
+    navigate("/MyLearning");
+  }
 
   const handlePrevious = () => {
     navigate('/MyLearning/HTML/Quiz');
   };
 
-  const handleNext = () => {
+  const handleNavHome = () => {
     navigate('/MyLearning/HTML');
   };
 
+  const handleNavIntroduction = () => {
+    navigate('/MyLearning/HTML/Introduction');
+  };
+
+  const handleNavEditors = () => {
+    navigate('/MyLearning/HTML/Editors');
+  };
+
+  const handleNavBasic = () => {
+    navigate('/MyLearning/HTML/Basic');
+  };
+
+  const handleNavQuiz = () => {
+    navigate('/MyLearning/HTML/Quiz');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove token from localStorage
+    navigate("/LearnIT"); // Redirect to login screen
+  };
+
   return (
-    <div style={styles.container}>
-      <div style={styles.sideBar}>
-        <h3>HTML Tutorial</h3>
-        <div style={styles.sideText}>Html Home</div>
-        <div style={styles.sideText}>Html Introduction</div>
-        <div style={styles.sideText}>Html Editors</div>
-        <div style={styles.sideText}>Html Basic</div>
-        <div style={styles.sideText}>Html Quiz</div>
-        <div style={styles.sideCurrent}>Html Results</div>
-      </div>
-      <div style={styles.main}>
-        <h1>HTML Quiz Results</h1>
-        <div style={styles.result}>
-          <h3>Your Score: {score}</h3>
-          <p>Congratulations on completing the HTML quiz!</p>
-          <p>Review your answers and learn from any mistakes.</p>
+    <div id="mylearning">
+      <header className="header">
+        <div className='navin'  onClick={handleHome}>
+            <div className='logoimg'><img src={Logo} alt="hehe" /></div>
+            <div className='logotext'><div>LearnIT</div></div>
         </div>
-        <div style={styles.buttonContainer}>
-          <div style={styles.buttonTopic} onClick={handlePrevious}>{'<'} Retake Quiz</div>
-          <div style={styles.buttonTopic} onClick={handleNext}>Go Home {'>'}</div>
+        <div className="search-bar">
+          <input type="text" placeholder="Search Quiz" />
+          <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
+          <button onClick={handleHome}>Add Course</button>
         </div>
-      </div>
+        <div className="user-info">
+          <img src={Profile}></img>
+          <div className="Profile" onClick={handleProfile}>{userData.firstName} {userData.lastName}</div>
+        </div>
+      </header>
+
+      <main className="main">
+      <section className="dashboard">
+            <div className="dashboard-navigation">
+                <div>
+                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
+                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                </div>
+                <div>
+                <h2>Contact Us</h2>
+                <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                </div>
+            </div>
+        </section>
+        <section className="resources">
+          <h2>HTML</h2>
+          <div className="next-prev">
+          <div onClick={handlePrevious} className="button-prev">{'<'} Retake</div>
+          <div onClick={handleNext} className="button-next">Home {'>'}</div>
+        </div>
+          <div className="topic-container">
+          <div className="results">
+          <img src={Medal1}></img>
+          <h1>Congratulations!</h1>
+         <h2>Your Score is : {score}</h2>
+         </div>
+          </div>
+        </section>
+          
+        <section className="rside-bar">
+          <div className="users-online"> 
+              <span>Other users online</span>
+          </div>
+          <div className="achievements-text">
+              <span>Achievements</span>
+              <a href="#">View All</a>
+          </div>
+          <div className="trophy">
+            <div className="Medal">
+            <img src={Medal1} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal2} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal3} alt="Medal" />
+            <span>Medal</span>
+            </div>
+          </div>
+          <div className="current-topic">
+            <h2>You're Taking</h2>
+            <div>HTML</div>
+            <img src={course1Image}></img>
+
+          </div>
+        </section>
+        
+      </main>
     </div>
+
   );
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-  },
-  sideBar: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    backgroundColor: '#f0f0f0',
-    borderRight: '1px solid #dfdfdf',
-    padding: '20px',
-  },
-  main: {
-    flexGrow: 4,
-    padding: '20px',
-  },
-  result: {
-    backgroundColor: 'white',
-    padding: '20px',
-    marginBottom: '20px',
-    borderRadius: '5px',
-    boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.1)',
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-  },
-  buttonTopic: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#28B498',
-    color: 'white',
-    height: '50px',
-    width: '200px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-  sideText: {
-    padding: '5px',
-    paddingBottom: '5px',
-  },
-};
-
-export default Results;
+export default Basic;

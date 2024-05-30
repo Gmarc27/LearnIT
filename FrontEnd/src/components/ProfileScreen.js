@@ -71,19 +71,19 @@ const ProfileScreen = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
-    navigate("/LoginScreen"); // Redirect to login screen
-  };
-
-  const handleMyLearning = () => {
-    navigate("/MyLearning");
+    navigate("/LearnIT"); // Redirect to login screen
   };
 
   const handleHome = (e) => {
-    navigate("/LearnIT");
+    navigate("/MyLearning");
   };
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
+  };
+
+  const handleReload = () => {
+    navigate("/ProfileScreen");
   };
 
   const handleChange = (e) => {
@@ -100,13 +100,17 @@ const ProfileScreen = () => {
       console.error('User ID is undefined');
       return;
     }
-
+  
     const { _id, ...updateData } = formData; // Exclude _id from the data being sent
-
+  
     try {
       const response = await axios.put(`https://learnit-1-aggl.onrender.com/users/${userData._id}`, updateData);
       console.log('User updated:', response.data);
-      setUserData(response.data); // Update userData with the new data
+      
+      // Update userData with the new data
+      setUserData(response.data);
+      
+      // Hide the edit form
       setIsEditing(false);
     } catch (error) {
       console.error('Error updating user:', error);
@@ -147,7 +151,7 @@ const ProfileScreen = () => {
                 </div>
                 <div>
                 <h2>Contact Us</h2>
-                <h2 className="logout"><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
         </section>
@@ -167,6 +171,7 @@ const ProfileScreen = () => {
           <div>{userData.lastName}, {userData.firstName}</div>
           <div>{userData.studentID}</div>
           <div> STUDENT </div>
+          <div>{userData.course}</div>
         </div>
         {isEditing ? (
                 <form className="edit-form" onSubmit={handleSubmit}>
@@ -198,7 +203,7 @@ const ProfileScreen = () => {
                     <label>Bio:</label>
                     <textarea name="bio" value={formData.bio} onChange={handleChange} />
                   </div>
-                  <button type="submit">Save</button>
+                  <button type="submit" onClick={handleReload}>Save</button>
                 </form>
               ) : (
                 <div className="general-information">

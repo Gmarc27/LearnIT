@@ -16,7 +16,41 @@ import Medal3 from "../assets/Medal3.png";
 import Profile from "../assets/profile.jpg";
 
 function HtmlScreen() {
+  const [userData, setUserData] = useState(null);
+  const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem("token");
+        if (!userId) {
+          console.error("User ID not found in localStorage");
+          return;
+        }
+
+        // Fetch user data
+        const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
+        setUserData(userResponse.data);
+
+        // Fetch user's enrolled courses data
+        const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
+        if (userCoursesResponse.data) {
+          setResponseCourseData(userCoursesResponse.data);
+        } else {
+          console.log("No courses found for the user");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   const handleLearn = () => {
     navigate('/MyLearning/HTML/Introduction');
@@ -32,6 +66,10 @@ function HtmlScreen() {
 
   const handlePrevious = () => {
     navigate('/MyLearning');
+  };
+
+  const handleProfile = () => {
+    navigate("/ProfileScreen");
   };
 
   return (
@@ -95,7 +133,7 @@ function HtmlScreen() {
         </div>
         <div className="user-info">
           <img src={Profile}></img>
-          <span>Gmarc Collados</span>
+          <div className="Profile" onClick={handleProfile}>{userData.firstName} {userData.lastName}</div>
         </div>
       </header>
 
@@ -119,6 +157,12 @@ function HtmlScreen() {
           <div className="topic-container">
           <div className="Topics" onClick={handleLearn}>
             <h4>Learn HTML</h4>
+          </div>
+          <div className="current-topic">
+            <h1>You're Taking</h1>
+            <div>HTML</div>
+            <img src={course1Image}></img>
+
           </div>
           <div className="Topics" onClick={handleQuiz}>
             <h4>Take HTML Quiz</h4>
@@ -148,6 +192,7 @@ function HtmlScreen() {
             <span>Medal</span>
             </div>
           </div>
+          
         </section>
         
       </main>

@@ -455,6 +455,7 @@ body {
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    color: #28B498;
   }
   
   
@@ -481,6 +482,9 @@ body {
     align-items: start;
   }
 
+  .dashboard-navigation h2 {
+    cursor: pointer;
+  }
 
   .dashboard div {
     display: flex;
@@ -626,23 +630,22 @@ body {
   }
 
   .dashboard {
-    flex-grow: 2;
+    flex-grow: 1;
     max-width: 20%;
     min-width: 20%;
     min-height: 80vh;
   }
   
   .resources {
-    flex-grow: 8;
-    max-width: 60%;
-    max-width: 60%;
+    flex-grow: 10;
+    min-width: 60%;
     background-color: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: relative;
   }
   
   .rside-bar {
-    flex-grow: 2;
+    flex-grow: 1;
     max-width: 20%;
     min-width: 20%;
   }
@@ -701,13 +704,109 @@ body {
 
 .topic-container {
   display: flex;
+  position: relative;
   justify-content: space-evenly;
+  min-height: 20vh;
+  padding-bottom: 80px;
+}
+
+.topic-description div{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topic-description p{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topic-description img{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 60vh;
+}
+
+.topic-description h1{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topic-description {
+  min-width: 40vh;
+  max-width: 60vh;
+}
+
+.sidebar-topic {
+  max-width: 30vh;
+  min-width: 30vh;
+}
+
+.sidebar-topic .current {
+  display: flex;
+  color: white;
+  margin-top: 10px;
+  height: 30px;
+  max-width: 150px;
+  padding: 10px;
+  border-radius: 5px;
   align-items: center;
-  height: 50vh;
+  background-color: #28B498;
+  cursor: pointer;
+}
+
+.sidebar-topic div {
+  display: flex;
+  color: black;
+  margin-top: 10px;
+  height: 30px;
+  max-width: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+}
+
+.next-prev {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  min-width: 25vh;
+}
+
+.button-next {
+  display: flex;
+  cursor: pointer;
+  background-color: #28B498;
+  color: white;
+  border-radius: 5px;
+  height: 30px;
+  width: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-prev {
+  display: flex;
+  cursor: pointer;
+  background-color: #28B498;
+  color: white;
+  border-radius: 5px;
+  height: 30px;
+  width: 90px;
+  justify-content: center;
+  align-items: center;
 }
 
 .Profile {
   cursor: pointer;
+  font-weight: bold;
+  font-size: larger;
+  color: #28B498;
+  text-shadow: 0px 0px 2px #28B498;
 }
 
 .profile-stats {
@@ -746,6 +845,10 @@ body {
   flex-direction: column;
 }
 
+.general-information div{
+  font-weight: bold;
+}
+
 .general-container {
   margin: 10px;
   background-color: #eeeeee;
@@ -756,11 +859,97 @@ body {
   border-radius: 5px;
 }
 
+.general-container div{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .edit {
   position: absolute;
   top: 30px;
   right: 30px;
   font-size: 50px;
   cursor: pointer;
+}
+
+.edit :hover {
+  font-size: 70px;
+  transition: 0.5s;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.edit-form label{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: start;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.edit-form input{
+  display: flex;
+  flex-direction: column;
+  width: 40vh;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.edit-form .textarea{
+  display: flex;
+  flex-direction: column;
+  min-width: 40vh;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logout {
+  cursor: pointer;
+}
+
+
+.current-topic img{
+  height: 200px;
+  width: 200px;
+}
+
+.current-topic {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-topic div{
+  font-weight: bold;
+  font-size: 40px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+}
+
+.results img{
+  height: 200px;
+  width: 200px;
 }
 

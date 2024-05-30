@@ -1,237 +1,216 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { MdClose } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import Logo from './assets/Logo.png';
+import course1Image from "./assets/course1.png";
+import course2Image from "./assets/course2.png";
+import course3Image from "./assets/course3.png";
+import course4Image from "./assets/course4.png";
+import course5Image from "./assets/course5.png";
+import Medal1 from "./assets/Medal1.png";
+import Medal2 from "./assets/Medal2.png";
+import Medal3 from "./assets/Medal3.png";
+import Profile from "./assets/profile.jpg";
 
 function Introduction() {
+  const [userData, setUserData] = useState(null);
+  const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem("token");
+        if (!userId) {
+          console.error("User ID not found in localStorage");
+          return;
+        }
+
+        // Fetch user data
+        const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
+        setUserData(userResponse.data);
+
+        // Fetch user's enrolled courses data
+        const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
+        if (userCoursesResponse.data) {
+          setResponseCourseData(userCoursesResponse.data);
+        } else {
+          console.log("No courses found for the user");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
+  const handleProfile = () => {
+    navigate("/ProfileScreen");
+  };
 
   const handleNext = () => {
     navigate('/MyLearning/HTML/Editors');
   };
 
+  const handleHome = () => {
+    navigate("/MyLearning");
+  }
+
   const handlePrevious = () => {
     navigate('/MyLearning/HTML');
   };
 
+  const handleNavHome = () => {
+    navigate('/MyLearning/HTML');
+  };
+
+  const handleNavIntroduction = () => {
+    navigate('/MyLearning/HTML/Introduction');
+  };
+
+  const handleNavEditors = () => {
+    navigate('/MyLearning/HTML/Editors');
+  };
+
+  const handleNavBasic = () => {
+    navigate('/MyLearning/HTML/Basic');
+  };
+
+  const handleNavQuiz = () => {
+    navigate('/MyLearning/HTML/Quiz');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove token from localStorage
+    navigate("/LearnIT"); // Redirect to login screen
+  };
+
   return (
-    <div style={styles.container}>
-      <div style={styles.sideBar}>
-        <h3>HTML Tutorial</h3>
-        <div style={styles.sideText}>Html Home</div>
-        <div style={styles.sideCurrent}>Html Introduction</div>
-        <div style={styles.sideText}>Html Editors</div>
-        <div style={styles.sideText}>Html Basic</div>
-        <div style={styles.sideText}>Html Quiz</div>
-        <div style={styles.sideText}>Html Results</div>
-      </div>
-      <div style={styles.main}>
-        <h1>HTML Introduction</h1>
-        <div style={styles.buttonContainer}>
-          <div style={styles.buttonTopic} onClick={handlePrevious}>{'<'} Previous</div>
-          <div style={styles.buttonTopic} onClick={handleNext}>Next {'>'}</div>
+    <div id="mylearning">
+      <header className="header">
+        <div className='navin'  onClick={handleHome}>
+            <div className='logoimg'><img src={Logo} alt="hehe" /></div>
+            <div className='logotext'><div>LearnIT</div></div>
         </div>
-        <div style={styles.section}>
-          <div style={styles.content}>
-            <h4>HTML is the standard markup language for creating Web pages.</h4>
-            <ul>
-              <li style={styles.text}><strong>HTML:</strong> Hyper Text Markup Language</li>
-              <li style={styles.text}><strong>Standard:</strong> Markup language for creating Web pages</li>
-              <li style={styles.text}><strong>Structure:</strong> Describes the structure of a Web page</li>
-              <li style={styles.text}><strong>Elements:</strong> Series of elements</li>
-              <li style={styles.text}><strong>Browser Display:</strong> Elements tell the browser how to display the content</li>
-            </ul>
+        <div className="search-bar">
+          <input type="text" placeholder="Search Quiz" />
+          <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
+          <button onClick={handleHome}>Add Course</button>
+        </div>
+        <div className="user-info">
+          <img src={Profile}></img>
+          <div className="Profile" onClick={handleProfile}>{userData.firstName} {userData.lastName}</div>
+        </div>
+      </header>
+
+      <main className="main">
+      <section className="dashboard">
+            <div className="dashboard-navigation">
+                <div>
+                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
+                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                </div>
+                <div>
+                <h2>Contact Us</h2>
+                <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                </div>
+            </div>
+        </section>
+        <section className="resources">
+          <h2>HTML</h2>
+          <div className="next-prev">
+          <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
+          <div onClick={handleNext} className="button-next">Next {'>'}</div>
+        </div>
+          <div className="topic-container">
+          <div className="sidebar-topic">
+              <h1>HTML Tutorial</h1>
+              <div onClick={handleNavHome}>Html Home</div>
+              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
+              <div onClick={handleNavEditors}>Html Editors</div>
+              <div onClick={handleNavBasic}>Html Basic</div>
+              <div onClick={handleNavQuiz}>Html Quiz</div>
+              <div>Html Results</div>
           </div>
-          <div style={styles.content}>
-            <h3>Example Explained</h3>
-            <ul>
-              <li style={styles.text}><strong>{'<!DOCTYPE html>'}</strong> declaration defines the document as an HTML5 document</li>
-              <li style={styles.text}><strong>{'<html>'}</strong> element is the root element of an HTML page</li>
-              <li style={styles.text}><strong>{'<head>'}</strong> element contains meta information about the HTML page</li>
-              <li style={styles.text}><strong>{'<title>'}</strong> element specifies a title for the HTML page</li>
-              <li style={styles.text}><strong>{'<body>'}</strong> element defines the document's body, container for visible contents</li>
-              <li style={styles.text}><strong>{'<h1>'}</strong> element defines a large heading</li>
-              <li style={styles.text}><strong>{'<p>'}</strong> element defines a paragraph</li>
-            </ul>
-          </div>
-          <div style={styles.content}>
-            <h3>HTML Element</h3>
-            <div style={styles.text}>Defined by a start tag, content, and an end tag.</div>
-            <div style={styles.text}>{'<tagname> Content goes here... </tagname>'}</div>
-          </div>
-          <div style={styles.content}>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th>Start tag</th>
-                  <th>Element content</th>
-                  <th>End tag</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{'<h1>'}</td>
-                  <td>My First Heading</td>
-                  <td>{'</h1>'}</td>
-                </tr>
-                <tr>
-                  <td>{'<p>'}</td>
-                  <td>My first paragraph.</td>
-                  <td>{'</p>'}</td>
-                </tr>
-                <tr>
-                  <td>{'<br>'}</td>
-                  <td>none</td>
-                  <td>none</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div style={styles.content}>
-            <div style={styles.text}>Some HTML elements like {'<br>'} have no content and are called empty elements.</div>
-          </div>
-          <div style={styles.content}>
-            <h3>Web Browsers</h3>
-            <div style={styles.text}>Web browsers (Chrome, Edge, Firefox, Safari) read HTML documents and display them correctly.</div>
-          </div>
-          <div style={styles.content}>
-            <h3>HTML History</h3>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th>Year</th>
-                  <th>Version</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1989</td>
-                  <td>Tim Berners-Lee invented www</td>
-                </tr>
-                <tr>
-                  <td>1991</td>
-                  <td>Tim Berners-Lee invented HTML</td>
-                </tr>
-                <tr>
-                  <td>1993</td>
-                  <td>Dave Raggett drafted HTML+</td>
-                </tr>
-                <tr>
-                  <td>1995</td>
-                  <td>HTML Working Group defined HTML 2.0</td>
-                </tr>
-                <tr>
-                  <td>1997</td>
-                  <td>W3C Recommendation: HTML 3.2</td>
-                </tr>
-                <tr>
-                  <td>1999</td>
-                  <td>W3C Recommendation: HTML 4.01</td>
-                </tr>
-                <tr>
-                  <td>2000</td>
-                  <td>W3C Recommendation: XHTML 1.0</td>
-                </tr>
-                <tr>
-                  <td>2008</td>
-                  <td>WHATWG HTML5 First Public Draft</td>
-                </tr>
-                <tr>
-                  <td>2012</td>
-                  <td>WHATWG HTML5 Living Standard</td>
-                </tr>
-                <tr>
-                  <td>2014</td>
-                  <td>W3C Recommendation: HTML5</td>
-                </tr>
-                <tr>
-                  <td>2016</td>
-                  <td>W3C Candidate Recommendation: HTML 5.1</td>
-                </tr>
-                <tr>
-                  <td>2017</td>
-                  <td>W3C Recommendation: HTML5.1 2nd Edition</td>
-                </tr>
-                <tr>
-                  <td>2017</td>
-                  <td>W3C Recommendation: HTML5.2</td>
-                </tr>
-              </tbody>
-            </table>
+      <div>
+        <h1>HTML Tutorial</h1>
+        <div>
+          <div>HTML is the standard markup language for Web pages.</div>
+          <div>With HTML you can create your own Website.</div>
+          <div>HTML is easy to learn - You will enjoy it!</div>
+        </div>
+        <div>
+          <h1>HTML Example</h1>
+          <div>
+            {'<!DOCTYPE html>'}
+            <br />
+            {'<html>'}
+            <br />
+            {'<head>'}
+            <br />
+            {'<title>'}Page Title{'</title>'}
+            <br />
+            {'</head>'}
+            <br />
+            {'<body>'}
+            <br />
+            {'<h1>This is a Heading</h1>'}
+            <br />
+            {'<p>This is a paragraph</p>'}
+            <br />
+            {'</body>'}
+            <br />
+            {'</html>'}
           </div>
         </div>
       </div>
+          </div>
+        </section>
+          
+        <section className="rside-bar">
+          <div className="users-online"> 
+              <span>Other users online</span>
+          </div>
+          <div className="achievements-text">
+              <span>Achievements</span>
+              <a href="#">View All</a>
+          </div>
+          <div className="trophy">
+            <div className="Medal">
+            <img src={Medal1} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal2} alt="Medal" />
+            <span>Medal</span>
+            </div>
+            <div className="Medal">
+            <img src={Medal3} alt="Medal" />
+            <span>Medal</span>
+            </div>
+          </div>
+          <div className="current-topic">
+            <h2>You're Taking</h2>
+            <div>HTML</div>
+            <img src={course1Image}></img>
+
+          </div>
+        </section>
+        
+      </main>
     </div>
+
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-  },
-
-  sideBar: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    backgroundColor: '#f0f0f0',
-    borderRight: '1px solid #dfdfdf',
-    padding: '20px',
-  },
-  main: {
-    flexGrow: 4,
-    padding: '20px',
-  },
-  sideText: {
-    padding: '5px',
-    paddingBottom: '5px',
-    cursor: 'pointer',
-  },
-  sideCurrent: {
-    padding: '5px',
-    paddingBottom: '5px',
-    backgroundColor: '#28B498',
-    color: 'white',
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-  },
-  buttonTopic: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#28B498',
-    color: 'white',
-    height: '50px',
-    width: '100px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-  section: {
-    marginBottom: '20px',
-  },
-  content: {
-    backgroundColor: 'white',
-    padding: '20px',
-    marginBottom: '20px',
-    borderRadius: '5px',
-    boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.1)',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    '& th, & td': {
-      border: '1px solid #dfdfdf',
-      padding: '8px',
-      textAlign: 'left',
-    },
-  },
-  text: {
-    marginTop: '10px',
-    marginBottom: '10px',
-  },
-};
 
 export default Introduction;
