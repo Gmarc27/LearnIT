@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket, faPen } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
 import course1Image from "../assets/course1.png";
 import course2Image from "../assets/course2.png";
@@ -16,10 +16,10 @@ import Profile from "../assets/profile.jpg";
 
 const ProfileScreen = () => {
   const [userData, setUserData] = useState(null);
-  const [editingBio, setEditingBio] = useState(false); // State to track if bio is being edited
+  const [isEditing, setIsEditing] = useState(false);
   const [responseCourseData, setResponseCourseData] = useState(null);
-  const [newBio, setNewBio] = useState(""); // State to store the new bio
   const navigate = useNavigate();
+  const [formData, setFormData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,6 +33,15 @@ const ProfileScreen = () => {
         // Fetch user data
         const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
+        setFormData({
+          firstName: userResponse.data.firstName,
+          lastName: userResponse.data.lastName,
+          age: userResponse.data.age,
+          birthday: userResponse.data.birthday,
+          course: userResponse.data.course,
+          school: userResponse.data.school,
+          bio: userResponse.data.bio || "TEXTEXTTEXTEXTTEXTEXTTEXTEXT", // Assuming this is a field you want to edit
+        });
 
         // Fetch user's enrolled courses data
         const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
@@ -53,17 +62,6 @@ const ProfileScreen = () => {
     return <div>Loading...</div>;
   }
 
-  const handleSaveBio = async () => {
-    try {
-      const userId = localStorage.getItem("token");
-      await axios.put(`https://learnit-1-aggl.onrender.com/users/${userId}`, { bio: newBio });
-      setUserData({ ...userData, bio: newBio }); // Update the bio in the local state
-      setEditingBio(false); // Exit editing mode
-    } catch (error) {
-      console.error("Error updating bio:", error);
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
     navigate("/LoginScreen"); // Redirect to login screen
@@ -75,6 +73,29 @@ const ProfileScreen = () => {
 
   const handleHome = (e) => {
     navigate("/LearnIT");
+  };
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`https://learnit-1-aggl.onrender.com/users/${userData.id}`, formData);
+      console.log('User updated:', response.data);
+      // Optionally, you can update the userData state here if you want to immediately reflect the changes
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
   };
 
   const handleSettings = () => {
@@ -120,29 +141,66 @@ const ProfileScreen = () => {
 
         <section className="resources">
           <h2>PROFILE</h2>
-          <div className="profile-container">
-
-            <div className="profile-stats">
-                <div><img src={Profile}></img></div>
-                <div>{userData.lastName}, {userData.firstName}</div>
-                <div>{userData.studentID}</div>
-                <div> STUDENT </div>
-            </div>
-            <div className="general-information">
-                <div className="general-container">
-                  <h2>General Information</h2>
-                  <div>Age: {userData.age}</div>
-                  <div>Birthday</div>
-                  <div>Course</div>
-                  <div>School</div>
-                </div>
-                <div className="general-container">
-                  <h2>Bio:</h2>
-                  <div>TEXTEXTTEXTEXTTEXTEXTTEXTEXT</div>
-                </div>
-            </div>
-
+          <div className="edit">
+        <FontAwesomeIcon onClick={handleEdit} icon={faPen} />
+      </div>
+      <div className="profile-container">
+        <div className="profile-stats">
+          <div>
+            <img src={Profile} alt="Profile" />
           </div>
+          <div>{userData.lastName}, {userData.firstName}</div>
+          <div>{userData.studentID}</div>
+          <div> STUDENT </div>
+        </div>
+        {isEditing ? (
+          <form className="edit-form" onSubmit={handleSubmit}>
+            <div>
+              <label>First Name:</label>
+              <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
+            </div>
+            <div>
+              <label>Last Name:</label>
+              <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
+            </div>
+            <div>
+              <label>Age:</label>
+              <input type="number" name="age" value={formData.age} onChange={handleChange} />
+            </div>
+            <div>
+              <label>Birthday:</label>
+              <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} />
+            </div>
+            <div>
+              <label>Course:</label>
+              <input type="text" name="course" value={formData.course} onChange={handleChange} />
+            </div>
+            <div>
+              <label>School:</label>
+              <input type="text" name="school" value={formData.school} onChange={handleChange} />
+            </div>
+            <div>
+              <label>Bio:</label>
+              <textarea name="bio" value={formData.bio} onChange={handleChange} />
+            </div>
+            <button type="submit">Save</button>
+          </form>
+        ) : (
+          <div className="general-information">
+            <div className="general-container">
+              <h2>General Information</h2>
+              <div>Age: {userData.age} </div>
+              <div>Birthday: {userData.birthday}</div>
+              <div>Course: {userData.course}</div>
+              <div>School: {userData.school}</div>
+            </div>
+            <div className="general-container">
+              <h2>Bio:</h2>
+              <div>{formData.bio}</div>
+            </div>
+          </div>
+        )}
+      </div>
         </section>
           
         <section className="rside-bar">

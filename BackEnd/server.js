@@ -191,15 +191,24 @@ app.post('/addcourse', async (req, res) => {
 
 app.put('/users/:id', async (req, res) => {
     const userId = req.params.id;
-    const { bio } = req.body;
+    const { firstName, lastName, age, birthday, course, school, bio } = req.body;
+    
     try {
-        await User.findByIdAndUpdate(userId, { bio });
-        res.status(200).json({ message: 'User data updated successfully' });
+      await User.findByIdAndUpdate(userId, { 
+        firstName, 
+        lastName, 
+        age, 
+        birthday, 
+        course, 
+        school, 
+        bio 
+      });
+      res.status(200).json({ message: 'User data updated successfully' });
     } catch (error) {
-        console.error('Error updating user data:', error);
-        res.status(500).json({ error: 'Error updating user data' });
+      console.error('Error updating user data:', error);
+      res.status(500).json({ error: 'Error updating user data' });
     }
-});
+  });
 
 app.post('/ForgotPassword', async (req, res) => {
     const { email } = req.body;
