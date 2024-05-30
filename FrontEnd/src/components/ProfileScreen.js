@@ -17,7 +17,7 @@ const ProfileScreen = () => {
         const userId = localStorage.getItem("token");
         console.log(userId); // Log the user ID
         const response = await axios.get(
-          `https://learnit-bde1.onrender.com/users/${userId}`
+          `https://learnit-1-aggl.onrender.com/users/${userId}`
         );
         setUserData(response.data);
       } catch (error) {
@@ -31,7 +31,7 @@ const ProfileScreen = () => {
   const handleSaveBio = async () => {
     try {
       const userId = localStorage.getItem("token");
-      await axios.put(`https://learnit-bde1.onrender.com/users/${userId}`, { bio: newBio });
+      await axios.put(`https://learnit-1-aggl.onrender.com/users/${userId}`, { bio: newBio });
       setUserData({ ...userData, bio: newBio }); // Update the bio in the local state
       setEditingBio(false); // Exit editing mode
     } catch (error) {

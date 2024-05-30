@@ -45,11 +45,11 @@ function MyLearning() {
         }
   
         // Fetch user data
-        const userResponse = await axios.get(`https://learnit-bde1.onrender.com/users/${userId}`);
+        const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
   
         // Fetch user's enrolled courses data
-        const userCoursesResponse = await axios.get(`https://learnit-bde1.onrender.com/courses/${userId}`);
+        const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
         if (userCoursesResponse.data) {
           setResponseCourseData(userCoursesResponse.data);
         } else {
@@ -75,7 +75,7 @@ function MyLearning() {
       };
 
       const response = await axios.post(
-        "https://learnit-bde1.onrender.com/addcourse",
+        "https://learnit-1-aggl.onrender.com/addcourse",
         courseData
       );
 

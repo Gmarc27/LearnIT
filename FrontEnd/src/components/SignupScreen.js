@@ -20,7 +20,7 @@ const SignupScreen = () => {
 
     const handleSignup = async () => {
       try {
-          const response = await fetch('https://learnit-bde1.onrender.com/SignupScreen', { // <-- Update this URL
+          const response = await fetch('https://learnit-1-aggl.onrender.com/SignupScreen', { // <-- Update this URL
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

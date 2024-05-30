@@ -21,7 +21,7 @@ const ForgotPassword = () => {
         e.preventDefault();
         try {
             // Send the request to the correct URL
-            const response = await axios.post('https://learnit-bde1.onrender.com/ForgotPassword', { email });
+            const response = await axios.post('https://learnit-1-aggl.onrender.com/ForgotPassword', { email });
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response.data.error);
