@@ -24,11 +24,11 @@ function MyLearning() {
   const navigate = useNavigate();
 
   const handleHome = () => {
-    navigate("/MyLearning");
+    navigate("/LearnIT/MyLearning");
   }
 
   const handleProfile = () => {
-    navigate("/ProfileScreen");
+    navigate("/LearnIT/ProfileScreen");
   };
 
   const toggleContent = () => {
@@ -99,7 +99,7 @@ function MyLearning() {
   };
 
   const handleViewContent = (courseId) => {
-    navigate(`/MyLearning/${courseId}`);
+    navigate(`/LearnIT/MyLearning/${courseId}`);
   };
 
   const courses = [

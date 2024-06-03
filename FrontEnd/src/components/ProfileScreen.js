@@ -75,7 +75,7 @@ const ProfileScreen = () => {
   };
 
   const handleHome = (e) => {
-    navigate("/MyLearning");
+    navigate("/LearnIT/MyLearning");
   };
 
   const handleEdit = () => {
@@ -83,7 +83,7 @@ const ProfileScreen = () => {
   };
 
   const handleReload = () => {
-    navigate("/ProfileScreen");
+    navigate("/LearnIT/ProfileScreen");
   };
 
   const handleChange = (e) => {

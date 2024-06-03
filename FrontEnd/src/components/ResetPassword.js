@@ -17,7 +17,7 @@ const ResetPassword = () => {
     };
 
     const handleLogin = () => {
-        navigate('/LearnIT');
+        navigate('/LearnIT/LoginScreen');
     };
 
     // Extract the token from the URL query parameters

@@ -21,20 +21,20 @@ function App() {
     <Router>
       <Routes>
         <Route path="/LearnIT" element={<Home />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/ProfileScreen" element={<ProfileScreen />} />
-        <Route path="/LoginScreen" element={<LoginScreen />} />
-        <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        <Route path="/ResetPassword" element={<ResetPassword />} />
-        <Route path="/SignupScreen" element={<SignupScreen />} />
-        <Route path="/MyLearning" element={<MyLearning />} />
-        <Route path="/MyLearning/HTML" element={<HtmlScreen />} />
-            <Route path="/MyLearning/HTML/Introduction" element={<Introduction />} />
-            <Route path="/MyLearning/HTML/Editors" element={<Editors />} />
-            <Route path="/MyLearning/HTML/Basic" element={<Basic />} />
-            <Route path="/MyLearning/HTML/Quiz" element={<HtmlQuiz />} />
-            <Route path="/MyLearning/HTML/Results" element={<Results />} />
-        <Route path="/MyLearning/CSS" element={<CssScreen />} />
+        <Route path="/LearnIT" element={<Home />} />
+        <Route path="/LearnIT/ProfileScreen" element={<ProfileScreen />} />
+        <Route path="/LearnIT/LoginScreen" element={<LoginScreen />} />
+        <Route path="/LearnIT/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/LearnIT/ResetPassword" element={<ResetPassword />} />
+        <Route path="/LearnIT/SignupScreen" element={<SignupScreen />} />
+        <Route path="/LearnIT/MyLearning" element={<MyLearning />} />
+        <Route path="/LearnIT/MyLearning/HTML" element={<HtmlScreen />} />
+            <Route path="/LearnIT/MyLearning/HTML/Introduction" element={<Introduction />} />
+            <Route path="/LearnIT/MyLearning/HTML/Editors" element={<Editors />} />
+            <Route path="/LearnIT/MyLearning/HTML/Basic" element={<Basic />} />
+            <Route path="/LearnIT/MyLearning/HTML/Quiz" element={<HtmlQuiz />} />
+            <Route path="/LearnIT/MyLearning/HTML/Results" element={<Results />} />
+        <Route path="/LearnIT/MyLearning/CSS" element={<CssScreen />} />
       </Routes>
     </Router>
   );

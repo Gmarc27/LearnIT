@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     };
 
     const handleLogin = () => {
-        navigate('/LoginScreen');
+        navigate('/LearnIT/LoginScreen');
     };
 
     const handleSubmit = async (e) => {

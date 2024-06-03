@@ -10,7 +10,7 @@ const LoginScreen = () => {
     const navigate = useNavigate();
 
     const handleSignup = () => {
-        navigate('/SignupScreen');
+        navigate('/LearnIT/SignupScreen');
     };
 
     const handleHome = () => {
@@ -18,7 +18,7 @@ const LoginScreen = () => {
     };
 
     const handleForgot = () => {
-      navigate('/ForgotPassword');
+      navigate('/LearnIT/ForgotPassword');
   };
 
     const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ const LoginScreen = () => {
             if (response.data.message === "Login Successfully") {
                 console.log(response.data.userId);
                 localStorage.setItem('token', response.data.userId);
-                navigate('/MyLearning');
+                navigate('/LearnIT/MyLearning');
             } else {
                 setError("Login failed. Please check your credentials.");
             }

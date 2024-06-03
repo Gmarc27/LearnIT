@@ -10,11 +10,11 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/LoginScreen");
+    navigate("/LearnIT/LoginScreen");
   };
 
   const handleHome = (e) => {
-    navigate("/");
+    navigate("/LearnIT");
   };
 
   return (
