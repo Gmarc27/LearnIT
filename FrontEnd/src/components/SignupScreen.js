@@ -11,7 +11,7 @@ const SignupScreen = () => {
     const navigate = useNavigate();
 
     const handleGoback = (e) => {
-        navigate('/LoginScreen');
+        navigate('/LearnIT/LoginScreen');
     };
 
     const handleHome = (e) => {
