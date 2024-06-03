@@ -11,7 +11,7 @@ const SignupScreen = () => {
     const navigate = useNavigate();
 
     const handleGoback = (e) => {
-        navigate('/LoginScreen');
+        navigate('/LearnIT/LoginScreen');
     };
 
     const handleHome = (e) => {
@@ -36,7 +36,7 @@ const SignupScreen = () => {
           if (!response.ok) {
               throw new Error('Error signing up');
           }
-          navigate('/LoginScreen');
+          navigate('/LearnIT/LoginScreen'); //bug
       } catch (error) {
           console.error('Signup error:', error);
       }
