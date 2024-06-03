@@ -53,39 +53,39 @@ function Introduction() {
   }
 
   const handleProfile = () => {
-    navigate("/ProfileScreen");
+    navigate("/LearnIT/ProfileScreen"); //bug
   };
 
   const handleNext = () => {
-    navigate('/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/HTML/Editors');
   };
 
   const handleHome = () => {
-    navigate("/MyLearning");
+    navigate("/LearnIT/MyLearning");
   }
 
   const handlePrevious = () => {
-    navigate('/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/HTML');
   };
 
   const handleNavHome = () => {
-    navigate('/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/HTML');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/HTML/Introduction');
   };
 
   const handleNavEditors = () => {
-    navigate('/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/HTML/Editors');
   };
 
   const handleNavBasic = () => {
-    navigate('/MyLearning/HTML/Basic');
+    navigate('/LearnIT/MyLearning/HTML/Basic');
   };
 
   const handleNavQuiz = () => {
-    navigate('/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/HTML/Quiz');
   };
 
   const handleLogout = () => {

@@ -56,7 +56,7 @@ function Editors() {
   }
 
   const handleProfile = () => {
-    navigate("/LearnIT/ProfileScreen");
+    navigate("/LearnIT/ProfileScreen"); //bug
   };
 
   const handleNext = () => {

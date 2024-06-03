@@ -53,23 +53,23 @@ function HtmlScreen() {
   }
 
   const handleLearn = () => {
-    navigate('/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/HTML/Introduction');
   };
 
   const handleQuiz = () => {
-    navigate('/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/HTML/Quiz');
   };
 
   const handleHome = () => {
-    navigate("/MyLearning");
+    navigate("/LearnIT/MyLearning");
   }
 
   const handlePrevious = () => {
-    navigate('/MyLearning');
+    navigate('/LearnIT/MyLearning');
   };
 
   const handleProfile = () => {
-    navigate("/ProfileScreen");
+    navigate("/LearnIT/ProfileScreen"); //bug
   };
 
   return (
