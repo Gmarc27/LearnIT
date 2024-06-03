@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPhone } from '@fortawesome/free-solid-svg-icons';
@@ -15,10 +16,12 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function Results() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { score } = location.state;
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,11 +31,11 @@ function Introduction() {
           console.error("User ID not found in localStorage");
           return;
         }
-
+  
         // Fetch user data
         const userResponse = await axios.get(`https://learnit-1-aggl.onrender.com/users/${userId}`);
         setUserData(userResponse.data);
-
+  
         // Fetch user's enrolled courses data
         const userCoursesResponse = await axios.get(`https://learnit-1-aggl.onrender.com/courses/${userId}`);
         if (userCoursesResponse.data) {
@@ -44,20 +47,28 @@ function Introduction() {
         console.error("Error fetching user data:", error);
       }
     };
-
+  
     fetchUserData();
-  }, []);
+  
+    // Loop confetti every 3 seconds
+    const confettiInterval = setInterval(() => {
+      confetti();
+    }, 3000);
+  
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(confettiInterval);
+  }, []); 
 
   if (!userData) {
     return <div>Loading...</div>;
   }
 
   const handleProfile = () => {
-    navigate("/LearnIT/ProfileScreen"); //bug
+    navigate("/LearnIT/ProfileScreen");
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning'); //bug
   };
 
   const handleHome = () => {
@@ -65,27 +76,7 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
-  };
-
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
-  };
-
-  const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/Python/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -144,53 +135,17 @@ function Introduction() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>Python</h2>
           <div className="next-prev">
-          <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
-          <div onClick={handleNext} className="button-next">Next {'>'}</div>
+          <div onClick={handlePrevious} className="button-prev">{'<'} Retake</div>
+          <div onClick={handleNext} className="button-next">Home {'>'}</div>
         </div>
           <div className="topic-container">
-          <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
-          </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
-        </div>
-      </div>
+          <div className="results">
+          <img src={Medal1}></img>
+          <h1>Congratulations!</h1>
+         <h2>Your Score is : {score}</h2>
+         </div>
           </div>
         </section>
           
@@ -218,8 +173,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>Python</div>
+            <img src={course4Image}></img>
 
           </div>
         </section>
@@ -230,4 +185,4 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+export default Results;

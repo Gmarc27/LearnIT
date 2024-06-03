@@ -15,10 +15,77 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function PythonQuiz() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [score, setScore] = useState(0);
+    const [hovered, setHovered] = useState(null); // Add hovered state
+    const questions = [
+        {
+          question: 'What is the correct file extension for Python files?',
+          options: ['.pyth', '.pyt', '.pt', '.py'],
+          answer: '.py'
+        },
+        {
+          question: 'How do you create a variable with the floating number 2.8?',
+          options: ['x = float(2.8)', 'x = 2.8', 'x = int(2.8)', 'x = 2,8'],
+          answer: 'x = 2.8'
+        },
+        {
+          question: 'What is the correct syntax to output the type of a variable or object in Python?',
+          options: ['print(typeof(x))', 'print(typeOf(x))', 'print(type(x))', 'print(typeof x)'],
+          answer: 'print(type(x))'
+        },
+        {
+          question: 'Which function is used to get the length of a list in Python?',
+          options: ['length()', 'len()', 'count()', 'size()'],
+          answer: 'len()'
+        },
+        {
+          question: 'How do you start a comment in Python?',
+          options: ['//;', '<!--', '#', 'text-style: bold;'],
+          answer: '#'
+        },
+        {
+          question: 'Which method can be used to remove any whitespace from both the beginning and the end of a string?',
+          options: ['strip()', 'len()', 'trim()', 'ptrim()'],
+          answer: 'strip()'
+        },
+        {
+          question: 'Which of the following statements is used to create a function in Python?',
+          options: ['function myFunction():', 'create myFunction():', 'def myFunction():', 'define myFunction():'],
+          answer: 'def myFunction():'
+        },
+        {
+          question: 'How do you start writing an if statement in Python?',
+          options: ['if x > y:', 'if (x > y)', 'if x > y then:', 'if x > y then'],
+          answer: 'if x > y:'
+        },
+        {
+          question: 'Which of the following is the correct way to create a dictionary in Python?',
+          options: ['myDict = {key1: value1, key2: value2}', 'myDict = (key1: value1, key2: value2)', 'myDict = [key1: value1, key2: value2]', 'myDict = {key1 = value1, key2 = value2}'],
+          answer: 'myDict = {key1: value1, key2: value2}'
+        },
+        {
+          question: 'What is the output of the following code? print(2 ** 3)',
+          options: ['5', '6', '8', '9'],
+          answer: '8'
+        },
+        // Add more questions here
+      ];
+
+  const handleNext = (selectedOption) => {
+    if (selectedOption === questions[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      navigate('/LearnIT/MyLearning/Python/Results', { state: { score: score + 1 } });
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -56,36 +123,8 @@ function Introduction() {
     navigate("/LearnIT/ProfileScreen"); //bug
   };
 
-  const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
   const handleHome = () => {
     navigate("/LearnIT/MyLearning");
-  }
-
-  const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
-  };
-
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
-  };
-
-  const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -144,53 +183,24 @@ function Introduction() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
-          <div className="next-prev">
-          <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
-          <div onClick={handleNext} className="button-next">Next {'>'}</div>
-        </div>
+          <h2>Python</h2>
           <div className="topic-container">
-          <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
-          </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
+          <div style={styles.main}>
+          <h1>Python Quiz</h1>
+          <h2>{questions[currentQuestion].question}</h2>
           <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
+            {questions[currentQuestion].options.map((option, index) => (
+              <div
+                style={{ ...styles.option, ...(hovered === index ? styles.optionHover : null) }} 
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                onClick={() => handleNext(option)}
+              >
+                {option}
+              </div>
+            ))}
           </div>
         </div>
-      </div>
           </div>
         </section>
           
@@ -218,8 +228,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>Python</div>
+            <img src={course4Image}></img>
 
           </div>
         </section>
@@ -230,4 +240,47 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+const styles = {
+    container: {
+      display: 'flex',
+      width: '100%',
+      height: '100%',
+    },
+    sideBar: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      backgroundColor: '#f0f0f0',
+      borderRight: '1px solid #dfdfdf',
+      padding: '20px',
+    },
+    main: {
+      flexGrow: 4,
+      padding: '20px',
+    },
+    option: {
+      backgroundColor: 'white',
+      color: 'black',
+      padding: '10px',
+      marginBottom: '10px',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s',
+      border: '1px solid black',
+    },
+    optionHover: {
+      backgroundColor: '#28B498',
+    },
+    sideText: {
+      padding: '5px',
+      paddingBottom: '5px',
+    },
+    sideCurrent: {
+      padding: '5px',
+      paddingBottom: '5px',
+      backgroundColor: '#28B498',
+      color: 'white',
+    },
+  };
+
+export default PythonQuiz;

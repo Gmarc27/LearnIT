@@ -15,7 +15,7 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function Variables() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -57,7 +57,11 @@ function Introduction() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/Python/Quiz');
+  };
+
+  const handleNavSyntax = () => {
+    navigate('/LearnIT/MyLearning/Python/Syntax');
   };
 
   const handleHome = () => {
@@ -65,27 +69,27 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Comments');
   };
 
   const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Python');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/Python/Introduction');
   };
 
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+  const handleNavComments = () => {
+    navigate('/LearnIT/MyLearning/Python/Comments');
   };
 
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+  const handleNavVariables = () => {
+    navigate('/LearnIT/MyLearning/Python/Variables');
   };
 
   const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/Python/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -144,53 +148,88 @@ function Introduction() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>Python</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
-          <div onClick={handleNext} className="button-next">Next {'>'}</div>
+          <div onClick={handleNext} className="button-next">Quiz {'>'}</div>
         </div>
           <div className="topic-container">
           <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+          <h1>Python Tutorial</h1>
+              <div onClick={handleNavHome}>Python Home</div>
+              <div onClick={handleNavIntroduction}>Python Introduction</div>
+              <div onClick={handleNavSyntax}>Python Syntax</div>
+              <div onClick={handleNavComments}>Python Comments</div>
+              <div className="current" onClick={handleNavVariables}>Python Variables</div>
+              <div onClick={handleNavQuiz}>Python Quiz</div>
+              <div>Python Results</div>
           </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
-        </div>
-      </div>
+          <div className="topic-description">
+  <h1>Python Variables</h1>
+  
+  <div>
+    <h2>Variables</h2>
+    <p>Variables are containers for storing data values.</p>
+  </div>
+
+  <div>
+    <h2>Creating Variables</h2>
+    <p>Python has no command for declaring a variable.</p>
+    <p>A variable is created the moment you first assign a value to it.</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'x = 5'}</pre>
+    <pre>{'y = "John"'}</pre>
+    <pre>{'print(x)'}</pre>
+    <pre>{'print(y)'}</pre>
+  </div>
+
+  <p>Variables do not need to be declared with any particular type, and can even change type after they have been set.</p>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'x = 4       # x is of type int'}</pre>
+    <pre>{'x = "Sally" # x is now of type str'}</pre>
+    <pre>{'print(x)'}</pre>
+  </div>
+
+  <div>
+    <h2>Casting</h2>
+    <p>If you want to specify the data type of a variable, this can be done with casting.</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'x = str(3)    # x will be "3"'}</pre>
+    <pre>{'y = int(3)    # y will be 3'}</pre>
+    <pre>{'z = float(3)  # z will be 3.0'}</pre>
+  </div>
+
+  <div>
+    <h2>Get the Type</h2>
+    <p>You can get the data type of a variable with the <code>type()</code> function.</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'x = 5'}</pre>
+    <pre>{'y = "John"'}</pre>
+    <pre>{'print(type(x))'}</pre>
+    <pre>{'print(type(y))'}</pre>
+  </div>
+
+  <div>
+    <h2>Single or Double Quotes?</h2>
+    <p>String variables can be declared either by using single or double quotes:</p>
+    <pre>{'x = "John"'}</pre>
+    <p># is the same as</p>
+    <pre>{'x = \'John\''}</pre>
+  </div>
+</div>
+
+
           </div>
         </section>
           
@@ -218,8 +257,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>Python</div>
+            <img src={course4Image}></img>
 
           </div>
         </section>
@@ -230,4 +269,4 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+export default Variables;

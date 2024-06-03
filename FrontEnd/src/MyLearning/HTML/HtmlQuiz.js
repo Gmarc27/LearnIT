@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Logo from './assets/Logo.png';
 import course1Image from "./assets/course1.png";
 import course2Image from "./assets/course2.png";
@@ -73,11 +73,6 @@ function HtmlQuiz() {
       options: ['<row>', '<tr>', '<td>', '<table-row>'],
       answer: '<tr>'
     },
-    {
-      question: 'In HTML, what does the <canvas> element provide?',
-      options: ['A container for external content embedded within a web page', 'A way to display mathematical equations', 'A way to draw graphics on the fly with JavaScript', 'A multimedia container for audio and video playback'],
-      answer: 'A way to draw graphics on the fly with JavaScript'
-    },
     // Add more questions here
   ];
 
@@ -144,6 +139,10 @@ function HtmlQuiz() {
     navigate("/LearnIT/QuizHistory");
    };
 
+   const handleContactUs = () => { 
+    navigate("/LearnIT/ContactUs");
+   };
+
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
@@ -178,7 +177,7 @@ function HtmlQuiz() {
                     <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
-                <h2>Contact Us</h2>
+                <h2 onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="icon" />Contact Us</h2>
                 <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>

@@ -15,10 +15,77 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function CssQuiz() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [score, setScore] = useState(0);
+    const [hovered, setHovered] = useState(null); // Add hovered state
+    const questions = [
+        {
+          question: 'What does CSS stand for?',
+          options: ['Colorful Style Sheets', 'Creative Style Sheets', 'Cascading Style Sheets', 'Computer Style Sheets'],
+          answer: 'Cascading Style Sheets'
+        },
+        {
+          question: 'Which HTML attribute is used to define inline styles??',
+          options: ['class', 'font', 'styles', 'style'],
+          answer: 'style'
+        },
+        {
+          question: 'Which property is used to change the background color?',
+          options: ['bgcolor', 'color', 'background-color', 'background'],
+          answer: 'background-color'
+        },
+        {
+          question: 'Which CSS property controls the text size?',
+          options: ['font-size', 'text-size', 'font-style', 'text-style'],
+          answer: 'font-size'
+        },
+        {
+          question: 'How do you make the text bold?',
+          options: ['font-weight: bold;', 'font-style: bold;', 'text-weight: bold;', 'text-style: bold;'],
+          answer: 'font-weight: bold;'
+        },
+        {
+          question: 'How do you add a comment in a CSS file?',
+          options: ['// this is a comment', '/* this is a comment */', '<!-- this is a comment -->', 'this is a comment'],
+          answer: '/* this is a comment */'
+        },
+        {
+          question: 'Which property is used to change the font of an element?',
+          options: ['font-family', 'font-style', 'font-weight', 'font-size'],
+          answer: 'font-family'
+        },
+        {
+          question: 'How do you select an element with id "demo"?',
+          options: ['.demo', '#demo', 'demo', '*demo'],
+          answer: '#demo'
+        },
+        {
+          question: 'How do you select elements with class name "test"?',
+          options: ['*test', '#test', '.test', 'test'],
+          answer: 'To define metadata about an HTML document'
+        },
+        {
+          question: 'Which property is used to change the left margin of an element?',
+          options: ['margin-left', 'padding-left', 'indent', 'margin'],
+          answer: 'margin-left'
+        },
+        // Add more questions here
+      ];
+
+  const handleNext = (selectedOption) => {
+    if (selectedOption === questions[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      navigate('/LearnIT/MyLearning/CSS/Results', { state: { score: score + 1 } });
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -56,36 +123,8 @@ function Introduction() {
     navigate("/LearnIT/ProfileScreen"); //bug
   };
 
-  const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
   const handleHome = () => {
     navigate("/LearnIT/MyLearning");
-  }
-
-  const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
-  };
-
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
-  };
-
-  const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -145,52 +184,23 @@ function Introduction() {
         </section>
         <section className="resources">
           <h2>HTML</h2>
-          <div className="next-prev">
-          <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
-          <div onClick={handleNext} className="button-next">Next {'>'}</div>
-        </div>
           <div className="topic-container">
-          <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
-          </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
+          <div style={styles.main}>
+          <h1>HTML Quiz</h1>
+          <h2>{questions[currentQuestion].question}</h2>
           <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
+            {questions[currentQuestion].options.map((option, index) => (
+              <div
+                style={{ ...styles.option, ...(hovered === index ? styles.optionHover : null) }} 
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                onClick={() => handleNext(option)}
+              >
+                {option}
+              </div>
+            ))}
           </div>
         </div>
-      </div>
           </div>
         </section>
           
@@ -218,8 +228,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>CSS</div>
+            <img src={course2Image}></img>
 
           </div>
         </section>
@@ -230,4 +240,47 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+const styles = {
+    container: {
+      display: 'flex',
+      width: '100%',
+      height: '100%',
+    },
+    sideBar: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      backgroundColor: '#f0f0f0',
+      borderRight: '1px solid #dfdfdf',
+      padding: '20px',
+    },
+    main: {
+      flexGrow: 4,
+      padding: '20px',
+    },
+    option: {
+      backgroundColor: 'white',
+      color: 'black',
+      padding: '10px',
+      marginBottom: '10px',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s',
+      border: '1px solid black',
+    },
+    optionHover: {
+      backgroundColor: '#28B498',
+    },
+    sideText: {
+      padding: '5px',
+      paddingBottom: '5px',
+    },
+    sideCurrent: {
+      padding: '5px',
+      paddingBottom: '5px',
+      backgroundColor: '#28B498',
+      color: 'white',
+    },
+  };
+
+export default CssQuiz;

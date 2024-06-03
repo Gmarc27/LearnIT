@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPhone } from '@fortawesome/free-solid-svg-icons';
-import Logo from './assets/Logo.png';
-import course1Image from "./assets/course1.png";
-import course2Image from "./assets/course2.png";
-import course3Image from "./assets/course3.png";
-import course4Image from "./assets/course4.png";
-import course5Image from "./assets/course5.png";
-import Medal1 from "./assets/Medal1.png";
-import Medal2 from "./assets/Medal2.png";
-import Medal3 from "./assets/Medal3.png";
-import Profile from "./assets/profile.jpg";
+import Logo from '../assets/Logo.png';
+import course1Image from "../assets/course1.png";
+import course2Image from "../assets/course2.png";
+import course3Image from "../assets/course3.png";
+import course4Image from "../assets/course4.png";
+import course5Image from "../assets/course5.png";
+import Medal1 from "../assets/Medal1.png";
+import Medal2 from "../assets/Medal2.png";
+import Medal3 from "../assets/Medal3.png";
+import Profile from "../assets/profile.jpg";
 
-function Introduction() {
+function PythonScreen() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -52,12 +52,12 @@ function Introduction() {
     return <div>Loading...</div>;
   }
 
-  const handleProfile = () => {
-    navigate("/LearnIT/ProfileScreen"); //bug
+  const handleLearn = () => {
+    navigate('/LearnIT/MyLearning/Python/Introduction');
   };
 
-  const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+  const handleQuiz = () => {
+    navigate('/LearnIT/MyLearning/Python/Quiz');
   };
 
   const handleHome = () => {
@@ -65,27 +65,11 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning');
   };
 
-  const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
-
-  const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
-  };
-
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
-
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
-  };
-
-  const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+  const handleProfile = () => {
+    navigate("/LearnIT/ProfileScreen"); //bug
   };
 
   const handleUnjoinCourse = () => { 
@@ -105,16 +89,13 @@ function Introduction() {
    };
 
 
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token from localStorage
-    navigate("/LearnIT"); // Redirect to login screen
-  };
-
   return (
-    <div id="mylearning">
+    <div>
+
+<div id="mylearning">
       <header className="header">
-        <div className='navin'  onClick={handleHome}>
-            <div className='logoimg'><img src={Logo} alt="hehe" /></div>
+        <div className='navin'>
+            <div className='logoimg' onClick={handleHome}><img src={Logo} alt="hehe" /></div>
             <div className='logotext'><div>LearnIT</div></div>
         </div>
         <div className="search-bar">
@@ -139,58 +120,25 @@ function Introduction() {
                 </div>
                 <div>
                 <h2 onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="icon" />Contact Us</h2>
-                <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
+                <h2 className="logout"><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
-          <div className="next-prev">
-          <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
-          <div onClick={handleNext} className="button-next">Next {'>'}</div>
-        </div>
+          <h2>Python</h2>
           <div className="topic-container">
-          <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+          <div className="Topics" onClick={handleLearn}>
+            <h4>Learn Python</h4>
           </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
+          <div className="current-topic">
+            <h1>You're Taking</h1>
+            <div>Python</div>
+            <img src={course4Image}></img>
+
           </div>
-        </div>
-      </div>
+          <div className="Topics" onClick={handleQuiz}>
+            <h4>Take Python Quiz</h4>
+            </div>
           </div>
         </section>
           
@@ -216,18 +164,13 @@ function Introduction() {
             <span>Medal</span>
             </div>
           </div>
-          <div className="current-topic">
-            <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
-
-          </div>
+          
         </section>
         
       </main>
     </div>
 
+    </div>
   );
 }
-
-export default Introduction;
+export default PythonScreen;

@@ -57,7 +57,11 @@ function Introduction() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/Python/Variables');
+  };
+
+  const handleNavSyntax = () => {
+    navigate('/LearnIT/MyLearning/Python/Syntax');
   };
 
   const handleHome = () => {
@@ -65,27 +69,27 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Python/Syntax');
   };
 
   const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Python');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/Python/Introduction');
   };
 
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+  const handleNavComments = () => {
+    navigate('/LearnIT/MyLearning/Python/Comments');
   };
 
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+  const handleNavVariables = () => {
+    navigate('/LearnIT/MyLearning/Python/Variables');
   };
 
   const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/Python/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -144,54 +148,108 @@ function Introduction() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>Python</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
           <div onClick={handleNext} className="button-next">Next {'>'}</div>
         </div>
           <div className="topic-container">
           <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+          <h1>Python Tutorial</h1>
+              <div onClick={handleNavHome}>Python Home</div>
+              <div onClick={handleNavIntroduction}>Python Introduction</div>
+              <div onClick={handleNavSyntax}>Python Syntax</div>
+              <div className="current" onClick={handleNavComments}>Python Comments</div>
+              <div onClick={handleNavVariables}>Python Variables</div>
+              <div onClick={handleNavQuiz}>Python Quiz</div>
+              <div>Python Results</div>
           </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
-        </div>
+          <div className="topic-description">
+  <h1>Python Syntax</h1>
+
+  <div>
+    <h2>Execute Python Syntax</h2>
+    <p>As we learned in the previous page, Python syntax can be executed by writing directly in the Command Line:</p>
+    <pre>{'>>> print("Hello, World!")'}</pre>
+    <pre>{'Hello, World!'}</pre>
+    <p>Or by creating a python file on the server, using the .py file extension, and running it in the Command Line:</p>
+    <pre>{'C:\\Users\\Your Name>python myfile.py'}</pre>
+  </div>
+
+  <div>
+    <h2>Python Comments</h2>
+    <p>Comments can be used to explain Python code.</p>
+    <p>Comments can be used to make the code more readable.</p>
+    <p>Comments can be used to prevent execution when testing code.</p>
+  </div>
+
+  <div>
+    <h2>Creating a Comment</h2>
+    <p>Comments start with a <code>#</code>, and Python will ignore them:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'# This is a comment'}</pre>
+    <pre>{'print("Hello, World!")'}</pre>
+    <p>Comments can be placed at the end of a line, and Python will ignore the rest of the line:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'print("Hello, World!") # This is a comment'}</pre>
+    <p>A comment does not have to be text that explains the code; it can also be used to prevent Python from executing code:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'# print("Hello, World!")'}</pre>
+    <pre>{'print("Cheers, Mate!")'}</pre>
+  </div>
+
+  <div>
+    <h2>Multiline Comments</h2>
+    <p>Python does not really have a syntax for multiline comments.</p>
+    <p>To add a multiline comment, you could insert a <code>#</code> for each line:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'# This is a comment'}</pre>
+    <pre>{'# written in'}</pre>
+    <pre>{'# more than just one line'}</pre>
+    <pre>{'print("Hello, World!")'}</pre>
+  </div>
+
+  <div>
+    <p>Or, not quite as intended, you can use a multiline string. Since Python will ignore string literals that are not assigned to a variable, you can add a multiline string (triple quotes) in your code and place your comment inside it:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <pre>{'"""'}</pre>
+    <pre>{'This is a comment'}</pre>
+    <pre>{'written in'}</pre>
+    <pre>{'more than just one line'}</pre>
+    <pre>{'"""'}</pre>
+    <pre>{'print("Hello, World!")'}</pre>
+  </div>
+
+  <div>
+    <h2>Python Variables</h2>
+    <p>In Python, variables are created when you assign a value to them:</p>
+  </div>
+
+  <div>
+    <h3>Example</h3>
+    <p>Variables in Python:</p>
+    <pre>{'x = 5'}</pre>
+    <pre>{'y = "Hello, World!"'}</pre>
+    <p>Python has no command for declaring a variable.</p>
+    <p>You will learn more about variables in the Python Variables chapter.</p>
+  </div>
+</div>
       </div>
-          </div>
         </section>
           
         <section className="rside-bar">
@@ -218,8 +276,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>Python</div>
+            <img src={course4Image}></img>
 
           </div>
         </section>

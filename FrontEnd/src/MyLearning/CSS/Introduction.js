@@ -3,10 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Logo from './assets/Logo.png';
 import course1Image from "./assets/course1.png";
-import CSSHomepage from "./assets/CSSHomepage.png";
+import course2Image from "./assets/course2.png";
 import course3Image from "./assets/course3.png";
 import course4Image from "./assets/course4.png";
 import course5Image from "./assets/course5.png";
@@ -57,7 +57,11 @@ function Introduction() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/CSS/Syntax');
+  };
+
+  const handleNavSelectors = () => {
+    navigate('/LearnIT/MyLearning/CSS/Selectors');
   };
 
   const handleHome = () => {
@@ -65,27 +69,27 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/CSS');
   };
 
   const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/CSS');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/CSS/Introduction');
   };
 
   const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/CSS/Syntax');
   };
 
   const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+    navigate('/LearnIT/MyLearning/CSS/HowTo');
   };
 
   const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/CSS/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -98,6 +102,10 @@ function Introduction() {
 
    const handleQuizHistory = () => { 
     navigate("/LearnIT/QuizHistory");
+   };
+
+   const handleContactUs = () => { 
+    navigate("/LearnIT/ContactUs");
    };
 
 
@@ -134,7 +142,7 @@ function Introduction() {
                     <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
-                <h2>Contact Us</h2>
+                <h2 onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="icon" />Contact Us</h2>
                 <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
@@ -147,13 +155,14 @@ function Introduction() {
         </div>
           <div className="topic-container">
           <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+          <h1>CSS Tutorial</h1>
+              <div onClick={handleNavHome}>Css Home</div>
+              <div className="current" onClick={handleNavIntroduction}>Css Introduction</div>
+              <div onClick={handleNavEditors}>Css Syntax</div>
+              <div onClick={handleNavSelectors}>Css Selectors</div>
+              <div onClick={handleNavBasic}>Css How To</div>
+              <div onClick={handleNavQuiz}>Css Quiz</div>
+              <div>Css Results</div>
           </div>
           <div className="topic-description">
         <h1>CSS Tutorial</h1>
@@ -174,7 +183,7 @@ function Introduction() {
             <h1>CSS Demo - One HTML Page - Multiple Styles!</h1>
             <p>Here we will show one HTML page displayed with four different stylesheets.</p>
             <p>Click on the "Stylesheet 1", "Stylesheet 2", "Stylesheet 3", "Stylesheet 4" links below to see the different styles:</p>
-            <img src={CSSHomepage}></img>
+            <img src={course2Image}></img>
             <div>
               <h1>Why Use CSS?</h1>
               <p>CSS is used to define styles for your web pages, including the design, layout and variations in display for different devices and screen sizes.</p>
@@ -241,8 +250,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>CSS</div>
+            <img src={course2Image}></img>
 
           </div>
         </section>

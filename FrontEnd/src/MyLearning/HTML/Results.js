@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Logo from './assets/Logo.png';
 import course1Image from "./assets/course1.png";
 import course2Image from "./assets/course2.png";
@@ -16,7 +16,7 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Basic() {
+function Results() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -91,6 +91,10 @@ function Basic() {
     navigate("/LearnIT/QuizHistory");
    };
 
+   const handleContactUs = () => { 
+    navigate("/LearnIT/ContactUs");
+   };
+
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
@@ -125,7 +129,7 @@ function Basic() {
                     <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
-                <h2>Contact Us</h2>
+                <h2 onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="icon" />Contact Us</h2>
                 <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
@@ -181,4 +185,4 @@ function Basic() {
   );
 }
 
-export default Basic;
+export default Results;

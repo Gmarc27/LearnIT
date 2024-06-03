@@ -15,7 +15,7 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function Syntax() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -57,7 +57,11 @@ function Introduction() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/CSS/Selectors');
+  };
+
+  const handleNavSelectors = () => {
+    navigate('/LearnIT/MyLearning/CSS/Selectors');
   };
 
   const handleHome = () => {
@@ -65,27 +69,27 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/CSS/Introduction');
   };
 
   const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/CSS');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/CSS/Introduction');
   };
 
   const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/CSS/Syntax');
   };
 
   const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+    navigate('/LearnIT/MyLearning/CSS/HowTo');
   };
 
   const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/CSS/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -103,6 +107,7 @@ function Introduction() {
    const handleContactUs = () => { 
     navigate("/LearnIT/ContactUs");
    };
+
 
 
   const handleLogout = () => {
@@ -151,44 +156,49 @@ function Introduction() {
         </div>
           <div className="topic-container">
           <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+              <h1>CSS Tutorial</h1>
+              <div onClick={handleNavHome}>Css Home</div>
+              <div onClick={handleNavIntroduction}>Css Introduction</div>
+              <div className="current" onClick={handleNavEditors}>Css Syntax</div>
+              <div onClick={handleNavBasic}>Css Selectors</div>
+              <div onClick={handleNavSelectors}>Css How To</div>
+              <div onClick={handleNavQuiz}>Css Quiz</div>
+              <div>Css Results</div>
           </div>
-      <div>
-        <h1>HTML Tutorial</h1>
+          <div className="topic-description">
+          <h1>CSS Syntax</h1>
         <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
+          <div>A CSS rule consists of a selector and a declaration block.</div>
+          <div>
+            <h1>CSS Syntax</h1>
+            <p>The selector points to the HTML element you want to style.</p>
+            <p>The declaration block contains one or more declarations separated by semicolons.</p>
+            <p>Each declaration includes a CSS property name and a value, separated by a colon.</p>
+            <p>Multiple CSS declarations are separated with semicolons, and declaration blocks are surrounded by curly braces.</p>
+          </div>
+          <div>
+            <h1>Example</h1>
+            <p> In this example all  {'<p>'} elements will be center-aligned, with a red text color: </p>
+            {'p {'}
+            <br />
+            {'  color: red;'}
+            <br />
+            {'  text-align: center;'}
+            <br />
+            {'}'}
+            </div>
+            <div>
+            <h1>Example Explained</h1>
+            {'•  p is a selector in CSS (it points to the HTML element you want to style: <p>).'}
+            <br />
+            {'•  color is a property, and red is the property value'}
+            <br />
+            {'•  text-align is a property, and center is the property value'}
+            </div>
         </div>
         <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
+        </div>
+        <div>
         </div>
       </div>
           </div>
@@ -218,8 +228,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>CSS</div>
+            <img src={course2Image}></img>
 
           </div>
         </section>
@@ -230,4 +240,4 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+export default Syntax;

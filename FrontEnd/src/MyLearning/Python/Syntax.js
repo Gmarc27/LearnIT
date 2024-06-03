@@ -15,7 +15,7 @@ import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
 
-function Introduction() {
+function Syntax() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -57,7 +57,11 @@ function Introduction() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+    navigate('/LearnIT/MyLearning/Python/Comments');
+  };
+
+  const handleNavSyntax = () => {
+    navigate('/LearnIT/MyLearning/Python/Syntax');
   };
 
   const handleHome = () => {
@@ -65,27 +69,27 @@ function Introduction() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Python/Introduction');
   };
 
   const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
+    navigate('/LearnIT/MyLearning/Python');
   };
 
   const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/Python/Introduction');
   };
 
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
+  const handleNavComments = () => {
+    navigate('/LearnIT/MyLearning/Python/Comments');
   };
 
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+  const handleNavVariables = () => {
+    navigate('/LearnIT/MyLearning/Python/Variables');
   };
 
   const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/Python/Quiz');
   };
 
   const handleUnjoinCourse = () => { 
@@ -144,53 +148,54 @@ function Introduction() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>Python</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
           <div onClick={handleNext} className="button-next">Next {'>'}</div>
         </div>
           <div className="topic-container">
           <div className="sidebar-topic">
-              <h1>HTML Tutorial</h1>
-              <div onClick={handleNavHome}>Html Home</div>
-              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
-              <div onClick={handleNavEditors}>Html Editors</div>
-              <div onClick={handleNavBasic}>Html Basic</div>
-              <div onClick={handleNavQuiz}>Html Quiz</div>
-              <div>Html Results</div>
+          <h1>Python Tutorial</h1>
+              <div onClick={handleNavHome}>Python Home</div>
+              <div onClick={handleNavIntroduction}>Python Introduction</div>
+              <div className="current" onClick={handleNavSyntax}>Python Syntax</div>
+              <div onClick={handleNavComments}>Python Comments</div>
+              <div onClick={handleNavVariables}>Python Variables</div>
+              <div onClick={handleNavQuiz}>Python Quiz</div>
+              <div>Python Results</div>
           </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h1>HTML Example</h1>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
-        </div>
-      </div>
+          <div className="topic-description">
+  <h1>Python Tutorial</h1>
+  <div>
+    <h2>Introduction</h2>
+    <p>Python is a popular programming language.</p>
+    <p>Python can be used on a server to create web applications.</p>
+  </div>
+  <div>
+    <h2>Learning by Examples</h2>
+    <p>With our "Try it Yourself" editor, you can edit Python code and view the result.</p>
+  </div>
+  <div>
+    <h2>Example</h2>
+    <pre>{'print("Hello, World!")'}</pre>
+  </div>
+  <div>
+    <h2>Python File Handling</h2>
+    <p>In our File Handling section you will learn how to open, read, write, and delete files.</p>
+    <ul>
+      <li>Python File Handling</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Python Database Handling</h2>
+    <p>In our database section you will learn how to access and work with MySQL and MongoDB databases:</p>
+    <ul>
+      <li>Python MySQL Tutorial</li>
+      <li>Python MongoDB Tutorial</li>
+    </ul>
+  </div>
+</div>
+
           </div>
         </section>
           
@@ -218,8 +223,8 @@ function Introduction() {
           </div>
           <div className="current-topic">
             <h2>You're Taking</h2>
-            <div>HTML</div>
-            <img src={course1Image}></img>
+            <div>Python</div>
+            <img src={course4Image}></img>
 
           </div>
         </section>
@@ -230,4 +235,4 @@ function Introduction() {
   );
 }
 
-export default Introduction;
+export default Syntax;

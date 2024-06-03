@@ -15,7 +15,7 @@ import Medal2 from "../assets/Medal2.png";
 import Medal3 from "../assets/Medal3.png";
 import Profile from "../assets/profile.jpg";
 
-function AddCourse() {
+function MyLearning() {
   const [courseProgress, setCourseProgress] = useState({});
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
@@ -28,6 +28,10 @@ function AddCourse() {
 
   const handleProfile = () => {
     navigate("/LearnIT/ProfileScreen");
+  };
+
+  const toggleContent = () => {
+    navigate("/LearnIT/AddCourse");
   };
 
   const handleUnjoinCourse = () => { 
@@ -45,7 +49,6 @@ function AddCourse() {
    const handleContactUs = () => { 
     navigate("/LearnIT/ContactUs");
    };
-
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -84,82 +87,10 @@ function AddCourse() {
     navigate("/LearnIT"); // Redirect to login screen
   };
 
-  const handleAddCourse = async (title, description, content) => {
-    try {
-        const userId = localStorage.getItem("token");
-        const courseData = {
-            title: title,
-            description: description,
-            content: content,
-            progress: 0, // Set initial progress to 0
-            userID: userId,
-        };
-
-        const response = await axios.post(
-            "https://learnit-1-aggl.onrender.com/addcourse",
-            courseData
-        );
-
-        if (response.status === 201) {
-            console.log("Course added successfully:", response.data);
-        } else {
-            console.error("Failed to add course:", response.data);
-        }
-
-    } catch (error) {
-        console.error("Error adding course:", error);
-    }
-};
-
   const handleViewContent = (courseId) => {
     navigate(`/LearnIT/MyLearning/${courseId}`);
   };
 
-  const courses = [
-    {
-      courseID: 1,
-      title: "HTML",
-      description:
-        "HTML is the standard markup language for web pages. Use it to to structure the content on your own website.",
-      content: course1Image,
-    },
-    {
-      courseID: 2,
-      title: "CSS",
-      description:
-        "CSS is the language used to style an HTML document, and describes how elements should be displayed.",
-      content: course2Image,
-    },
-    {
-      courseID: 3,
-      title: "JavaScript",
-      description:
-        "JavaScript is a programming language that can be used to make content dynamic, control multimedia and make elements move.",
-      content: course3Image,
-    },
-    {
-      courseID: 4,
-      title: "Python",
-      description:
-        "Python can be used for everything from machine learning to building and testing websites. Useful for both developers and non-developers.",
-      content: course4Image,
-    },
-    {
-      courseID: 5,
-      title: "C++",
-      description:
-        "C++ is a general-purpose programming language, often used for applications that are graphics-heavy like games, photo and video editing apps.",
-      content: course5Image,
-    },
-
-    // Add more courses as needed
-  ];
-
-  const increaseProgress = (courseId) => {
-    const currentProgress = courseProgress[courseId] || 0;
-    const newProgress = Math.min(currentProgress + 10, 100); // Increment by 10%, but ensure it doesn't exceed 100%
-    handleProgressUpdate(courseId, newProgress);
-  };
 
   const handleProgressUpdate = (courseId, progress) => {
     setCourseProgress((prevProgress) => ({
@@ -178,7 +109,7 @@ function AddCourse() {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={handleHome} >Select Course</button>
+          <button onClick={toggleContent} >Add Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -190,53 +121,47 @@ function AddCourse() {
       <section className="dashboard">
             <div className="dashboard-navigation">
                 <div>
-                    <h2 className="current-page" onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2 onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="icon" />Dashboard</h2>
                     <h2 onClick={handleUnjoinCourse}><FontAwesomeIcon icon={faSquareMinus} className="icon" />Unjoin Course</h2>
                     <h2 onClick={Achievements}><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
                     <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
-                <h2 onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="icon" />Contact Us</h2>
+                <h2 className="current-page" onClick={handleContactUs}><FontAwesomeIcon icon={faPhone} className="current-icon" />Contact Us</h2>
                 <h2 className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon" />Log Out</h2>
                 </div>
             </div>
         </section>
         <section className="resources">
-          <h2>Resources</h2>
-          <div className  = "courseadd-container">
-              <div className="close-button">
-            <button onClick={handleHome} className  = "mdClose">
-                <MdClose />
-              </button>
-              </div>
-              <div className  = "course-container">
-              {courses.map((course) => (
-                <div
-                  key={course.courseID}
-                  className="coursecontainer2"
-                >
-                  <div
-                    className  = "coursecontainer"
-                  >
-                    <img
-                      src={course.content}
-                      alt={course.title}
-                      className  = "courseImage"
-                    />
-                    <div className="courseTitle">{course.title}</div>
-                    <div className="courseDescription">{course.description}</div>
-                  </div>
-
-                  <button className="addcourse-button" 
-                  onClick={() => handleAddCourse(
-                    course.title,
-                    course.description,
-                    course.content
-                  )}>Add Course</button>
-                </div>
-              ))}
-              </div>
-            </div>
+          <h2>Developers</h2>
+          <div>
+            <h1>Gmarc G. Collados</h1>
+            <p>Email Address: collados.gmarc06@gmail.com</p>
+            <p>Phone Numner: 0953 - 437 - 0071</p>
+            <p>3rd Year BSIT</p>
+            <p>R9</p>
+          </div>
+          <div>
+            <h1>Jayvee R. Contiñedo</h1>
+            <p>Email Address: continedoj10@gmail.com</p>
+            <p>Phone Numner: 0965 - 057 - 4097</p>
+            <p>3rd Year BSIT</p>
+            <p>R9</p>
+          </div>
+          <div>
+            <h1>Vincent P. Estenzo</h1>
+            <p>Email Address: vincentestenzo1@gmail.com</p> 
+            <p>Phone Numner: 0935 - 538 - 0789</p>
+            <p>3rd Year BSIT</p>
+            <p>R9</p>
+          </div>
+          <div>
+            <h1>Jerome A. Lagria</h1>
+            <p>Email Address: Jerom.Lagria14@gmail.com</p> 
+            <p>Phone Numner: 0916 - 187 - 6541</p>
+            <p>3rd Year BSIT</p>
+            <p>R9</p>
+          </div>
     
         </section>
           
@@ -270,4 +195,4 @@ function AddCourse() {
 }
 
 
-export default AddCourse;
+export default MyLearning;
