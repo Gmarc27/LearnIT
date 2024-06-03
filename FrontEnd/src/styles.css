@@ -119,15 +119,55 @@ body {
     display: flex;;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
   }
+
+  .addcourse-button {
+    height: 100px;
+    width: 200px;
+    background: linear-gradient(to bottom right, #f0eeee, #59595c);
+    color: white;
+    cursor: pointer;
+    font-size: larger;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 20px;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.8);
+  }
+  .addcourse-button:hover {
+    background: linear-gradient(to bottom right, #f0eeee, #28B498);
+    transition: 0.2s;
+  }
+
 
   .courseadd-container {
     display: flex;
     max-width: 100%;
     flex-direction: row;
     position: relative;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .coursecontainer {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: linear-gradient(to bottom right, #f0eeee, #59595c);
+  }
+
+  .coursecontainer2{
+    display: flex;
+    width: 70vh;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .close-button {
@@ -573,6 +613,11 @@ body {
   border-radius: 5px;
   margin: 30px;
   }
+
+.boxcontainer:hover {
+  background: linear-gradient(to bottom right, #f0eeee, #28B498);
+  transition: 0.2s;
+}
 
   .courseDescription {
     border-radius: 5px;

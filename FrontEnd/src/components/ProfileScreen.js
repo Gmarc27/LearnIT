@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket, faPen } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
 import Profile from "../assets/profile.jpg";
 import Medal1 from "../assets/Medal1.png";
@@ -86,6 +86,19 @@ const ProfileScreen = () => {
     navigate("/LearnIT/ProfileScreen");
   };
 
+  const handleUnjoinCourse = () => { 
+    navigate("/LearnIT/UnjoinCourse");
+   };
+
+   const Achievements = () => { 
+    navigate("/LearnIT/Achievements");
+   };
+
+   const handleQuizHistory = () => { 
+    navigate("/LearnIT/QuizHistory");
+   };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -132,7 +145,7 @@ const ProfileScreen = () => {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={handleHome}>Add Course</button>
+          <button onClick={handleHome}>Select Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -144,10 +157,10 @@ const ProfileScreen = () => {
       <section className="dashboard">
             <div className="dashboard-navigation">
                 <div>
-                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
-                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
-                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
-                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                    <h2 className="current-page" onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2 onClick={handleUnjoinCourse}><FontAwesomeIcon icon={faSquareMinus} className="icon" />Unjoin Course</h2>
+                    <h2 onClick={Achievements}><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
                 <h2>Contact Us</h2>

@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from './assets/Logo.png';
 import course1Image from "./assets/course1.png";
 import course2Image from "./assets/course2.png";
@@ -79,25 +79,18 @@ function Basic() {
     navigate('/LearnIT/MyLearning/HTML/Quiz');
   };
 
-  const handleNavHome = () => {
-    navigate('/LearnIT/MyLearning/HTML');
-  };
+  const handleUnjoinCourse = () => { 
+    navigate("/LearnIT/UnjoinCourse");
+   };
 
-  const handleNavIntroduction = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
-  };
+   const Achievements = () => { 
+    navigate("/LearnIT/Achievements");
+   };
 
-  const handleNavEditors = () => {
-    navigate('/LearnIT/MyLearning/HTML/Editors');
-  };
+   const handleQuizHistory = () => { 
+    navigate("/LearnIT/QuizHistory");
+   };
 
-  const handleNavBasic = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
-  };
-
-  const handleNavQuiz = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token from localStorage
@@ -114,7 +107,7 @@ function Basic() {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={handleHome}>Add Course</button>
+          <button onClick={handleHome}>Select Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -126,10 +119,10 @@ function Basic() {
       <section className="dashboard">
             <div className="dashboard-navigation">
                 <div>
-                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
-                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
-                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
-                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                    <h2 className="current-page" onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2 onClick={handleUnjoinCourse}><FontAwesomeIcon icon={faSquareMinus} className="icon" />Unjoin Course</h2>
+                    <h2 onClick={Achievements}><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
                 <h2>Contact Us</h2>

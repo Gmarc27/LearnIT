@@ -15,7 +15,7 @@ import Medal2 from "../assets/Medal2.png";
 import Medal3 from "../assets/Medal3.png";
 import Profile from "../assets/profile.jpg";
 
-function MyLearning() {
+function UnjoinCourse() {
   const [courseProgress, setCourseProgress] = useState({});
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
@@ -30,10 +30,6 @@ function MyLearning() {
     navigate("/LearnIT/ProfileScreen");
   };
 
-  const toggleContent = () => {
-    navigate("/LearnIT/AddCourse");
-  };
-
   const handleUnjoinCourse = () => { 
     navigate("/LearnIT/UnjoinCourse");
    };
@@ -45,6 +41,7 @@ function MyLearning() {
    const handleQuizHistory = () => { 
     navigate("/LearnIT/QuizHistory");
    };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -82,6 +79,30 @@ function MyLearning() {
     localStorage.removeItem("token"); // Remove token from localStorage
     navigate("/LearnIT"); // Redirect to login screen
   };
+
+  const handleDeleteCourse = async (title) => {
+    try {
+        const userId = localStorage.getItem("token");
+        const courseData = {
+            title: title,
+            user: userId, // Change key to 'user'
+        };
+
+        const response = await axios.delete(
+            "https://learnit-1-aggl.onrender.com/deletecourse",
+            { data: courseData } // Use 'data' key to send data in the request body
+        );
+
+        if (response.status === 200 || response.status === 204) {
+            console.log("Course deleted successfully:", response.data);
+        } else {
+            console.error("Failed to delete course:", response.data);
+        }
+
+    } catch (error) {
+        console.error("Error deleting course:", error);
+    }
+};
 
   const handleViewContent = (courseId) => {
     navigate(`/LearnIT/MyLearning/${courseId}`);
@@ -150,7 +171,7 @@ function MyLearning() {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={toggleContent} >Add Course</button>
+          <button onClick={handleHome} >Select Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -175,10 +196,18 @@ function MyLearning() {
         </section>
         <section className="resources">
           <h2>Resources</h2>
-          {responseCourseData && (
+          <div className  = "courseadd-container">
+              <div className="close-button">
+            <button onClick={handleHome} className  = "mdClose">
+                <MdClose />
+              </button>
+              </div>
+              <div className  = "course-container">
+              {responseCourseData && (
             <div className="course-container">
               {responseCourseData.map(course => (
-                <div key={course._id} className="boxcontainer"  onClick={() => handleViewContent(course.title)}>  
+              <div className="coursecontainer2">
+                <div key={course._id} className="coursecontainer">  
                   <div className="courseTitle">{course.title}</div>
                     <img
                       src={course.content}
@@ -187,9 +216,18 @@ function MyLearning() {
                     />
                     <div className="courseDescription">{course.description}</div>
                 </div>
+                <button className="addcourse-button" 
+                  onClick={() => handleDeleteCourse(
+                    course.title,
+                    course.description,
+                    course.content
+                  )}>UnJoin Course</button>
+                </div>
               ))}
             </div>
           )}
+              </div>
+            </div>
     
         </section>
           
@@ -223,4 +261,4 @@ function MyLearning() {
 }
 
 
-export default MyLearning;
+export default UnjoinCourse;

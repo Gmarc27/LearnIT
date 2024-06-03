@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faTableList, faBell, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../assets/Logo.png';
 import course1Image from "../assets/course1.png";
 import course2Image from "../assets/course2.png";
@@ -72,53 +72,21 @@ function HtmlScreen() {
     navigate("/LearnIT/ProfileScreen"); //bug
   };
 
+  const handleUnjoinCourse = () => { 
+    navigate("/LearnIT/UnjoinCourse");
+   };
+
+   const Achievements = () => { 
+    navigate("/LearnIT/Achievements");
+   };
+
+   const handleQuizHistory = () => { 
+    navigate("/LearnIT/QuizHistory");
+   };
+
+
   return (
     <div>
-      {/*<div>
-        <h3>HTML Tutorial</h3>
-        <div>Html Home</div>
-        <div>Html Introduction</div>
-        <div>Html Editors</div>
-        <div>Html Basic</div>
-        <div>Html Quiz</div>
-        <div>Html Results</div>
-      </div>
-      <div>
-        <h1>HTML Tutorial</h1>
-        <div>
-          <div onClick={handlePrevious}>{'<'} Home</div>
-          <div onClick={handleNext}>Next {'>'}</div>
-        </div>
-        <div>
-          <div>HTML is the standard markup language for Web pages.</div>
-          <div>With HTML you can create your own Website.</div>
-          <div>HTML is easy to learn - You will enjoy it!</div>
-        </div>
-        <div>
-          <h2>HTML Example</h2>
-          <div>
-            {'<!DOCTYPE html>'}
-            <br />
-            {'<html>'}
-            <br />
-            {'<head>'}
-            <br />
-            {'<title>'}Page Title{'</title>'}
-            <br />
-            {'</head>'}
-            <br />
-            {'<body>'}
-            <br />
-            {'<h1>This is a Heading</h1>'}
-            <br />
-            {'<p>This is a paragraph</p>'}
-            <br />
-            {'</body>'}
-            <br />
-            {'</html>'}
-          </div>
-        </div>
-      </div>*/}
 
 <div id="mylearning">
       <header className="header">
@@ -129,7 +97,7 @@ function HtmlScreen() {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={handleHome}>Add Course</button>
+          <button onClick={handleHome}>Select Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -141,10 +109,10 @@ function HtmlScreen() {
       <section className="dashboard">
             <div className="dashboard-navigation">
                 <div>
-                    <h2 className="current-page"><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
-                    <h2><FontAwesomeIcon icon={faBell} className="icon" />Notification</h2>
-                    <h2><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
-                    <h2><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                    <h2 className="current-page" onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2 onClick={handleUnjoinCourse}><FontAwesomeIcon icon={faSquareMinus} className="icon" />Unjoin Course</h2>
+                    <h2 onClick={Achievements}><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
+                    <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
                 </div>
                 <div>
                 <h2>Contact Us</h2>

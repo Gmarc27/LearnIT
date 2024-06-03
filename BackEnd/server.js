@@ -199,6 +199,26 @@ app.post('/addcourse', async (req, res) => {
     }
 });
 
+app.delete('/deletecourse', async (req, res) => {
+    const { title, user } = req.body;
+    try {
+        // Find the course to be deleted based on the title and user
+        const courseToDelete = await Course.findOne({ title, user });
+
+        if (!courseToDelete) {
+            return res.status(404).json({ error: 'Course not found' });
+        }
+
+        // Delete the course
+        await Course.findByIdAndDelete(courseToDelete._id);
+
+        res.json({ message: 'Course deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting course:', error);
+        res.status(500).json({ error: 'Error deleting course' });
+    }
+});
+
 app.put('/users/:id', async (req, res) => {
     const userId = req.params.id;
     const { firstName, lastName, age, birthday, course, school, bio } = req.body;

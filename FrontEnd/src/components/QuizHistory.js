@@ -15,7 +15,7 @@ import Medal2 from "../assets/Medal2.png";
 import Medal3 from "../assets/Medal3.png";
 import Profile from "../assets/profile.jpg";
 
-function MyLearning() {
+function Achievements() {
   const [courseProgress, setCourseProgress] = useState({});
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
@@ -82,6 +82,33 @@ function MyLearning() {
     localStorage.removeItem("token"); // Remove token from localStorage
     navigate("/LearnIT"); // Redirect to login screen
   };
+
+  const handleAddCourse = async (title, description, content) => {
+    try {
+        const userId = localStorage.getItem("token");
+        const courseData = {
+            title: title,
+            description: description,
+            content: content,
+            progress: 0, // Set initial progress to 0
+            userID: userId,
+        };
+
+        const response = await axios.post(
+            "https://learnit-1-aggl.onrender.com/addcourse",
+            courseData
+        );
+
+        if (response.status === 201) {
+            console.log("Course added successfully:", response.data);
+        } else {
+            console.error("Failed to add course:", response.data);
+        }
+
+    } catch (error) {
+        console.error("Error adding course:", error);
+    }
+};
 
   const handleViewContent = (courseId) => {
     navigate(`/LearnIT/MyLearning/${courseId}`);
@@ -162,10 +189,10 @@ function MyLearning() {
       <section className="dashboard">
             <div className="dashboard-navigation">
                 <div>
-                    <h2 className="current-page" onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="current-icon" />Dashboard</h2>
+                    <h2 onClick={handleHome}><FontAwesomeIcon icon={faTableList} className="icon" />Dashboard</h2>
                     <h2 onClick={handleUnjoinCourse}><FontAwesomeIcon icon={faSquareMinus} className="icon" />Unjoin Course</h2>
                     <h2 onClick={Achievements}><FontAwesomeIcon icon={faChartSimple} className="icon" />Achievements</h2>
-                    <h2 onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="icon" />Quiz History</h2>
+                    <h2 className="current-page" onClick={handleQuizHistory}><FontAwesomeIcon icon={faClockRotateLeft} className="current-icon" />Quiz History</h2>
                 </div>
                 <div>
                 <h2>Contact Us</h2>
@@ -223,4 +250,4 @@ function MyLearning() {
 }
 
 
-export default MyLearning;
+export default Achievements;

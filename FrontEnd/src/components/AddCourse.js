@@ -15,7 +15,7 @@ import Medal2 from "../assets/Medal2.png";
 import Medal3 from "../assets/Medal3.png";
 import Profile from "../assets/profile.jpg";
 
-function MyLearning() {
+function AddCourse() {
   const [courseProgress, setCourseProgress] = useState({});
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
@@ -30,10 +30,6 @@ function MyLearning() {
     navigate("/LearnIT/ProfileScreen");
   };
 
-  const toggleContent = () => {
-    navigate("/LearnIT/AddCourse");
-  };
-
   const handleUnjoinCourse = () => { 
     navigate("/LearnIT/UnjoinCourse");
    };
@@ -45,6 +41,7 @@ function MyLearning() {
    const handleQuizHistory = () => { 
     navigate("/LearnIT/QuizHistory");
    };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -82,6 +79,33 @@ function MyLearning() {
     localStorage.removeItem("token"); // Remove token from localStorage
     navigate("/LearnIT"); // Redirect to login screen
   };
+
+  const handleAddCourse = async (title, description, content) => {
+    try {
+        const userId = localStorage.getItem("token");
+        const courseData = {
+            title: title,
+            description: description,
+            content: content,
+            progress: 0, // Set initial progress to 0
+            userID: userId,
+        };
+
+        const response = await axios.post(
+            "https://learnit-1-aggl.onrender.com/addcourse",
+            courseData
+        );
+
+        if (response.status === 201) {
+            console.log("Course added successfully:", response.data);
+        } else {
+            console.error("Failed to add course:", response.data);
+        }
+
+    } catch (error) {
+        console.error("Error adding course:", error);
+    }
+};
 
   const handleViewContent = (courseId) => {
     navigate(`/LearnIT/MyLearning/${courseId}`);
@@ -150,7 +174,7 @@ function MyLearning() {
         <div className="search-bar">
           <input type="text" placeholder="Search Quiz" />
           <FontAwesomeIcon className = "icon" icon={faMagnifyingGlass} />
-          <button onClick={toggleContent} >Add Course</button>
+          <button onClick={handleHome} >Select Course</button>
         </div>
         <div className="user-info">
           <img src={Profile}></img>
@@ -175,21 +199,40 @@ function MyLearning() {
         </section>
         <section className="resources">
           <h2>Resources</h2>
-          {responseCourseData && (
-            <div className="course-container">
-              {responseCourseData.map(course => (
-                <div key={course._id} className="boxcontainer"  onClick={() => handleViewContent(course.title)}>  
-                  <div className="courseTitle">{course.title}</div>
+          <div className  = "courseadd-container">
+              <div className="close-button">
+            <button onClick={handleHome} className  = "mdClose">
+                <MdClose />
+              </button>
+              </div>
+              <div className  = "course-container">
+              {courses.map((course) => (
+                <div
+                  key={course.courseID}
+                  className="coursecontainer2"
+                >
+                  <div
+                    className  = "coursecontainer"
+                  >
                     <img
                       src={course.content}
                       alt={course.title}
-                      className="courseImage"
+                      className  = "courseImage"
                     />
+                    <div className="courseTitle">{course.title}</div>
                     <div className="courseDescription">{course.description}</div>
+                  </div>
+
+                  <button className="addcourse-button" 
+                  onClick={() => handleAddCourse(
+                    course.title,
+                    course.description,
+                    course.content
+                  )}>Add Course</button>
                 </div>
               ))}
+              </div>
             </div>
-          )}
     
         </section>
           
@@ -223,4 +266,4 @@ function MyLearning() {
 }
 
 
-export default MyLearning;
+export default AddCourse;

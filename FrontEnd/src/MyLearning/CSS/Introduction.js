@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTableList, faSquareMinus, faChartSimple, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from './assets/Logo.png';
 import course1Image from "./assets/course1.png";
-import course2Image from "./assets/course2.png";
+import CSSHomepage from "./assets/CSSHomepage.png";
 import course3Image from "./assets/course3.png";
 import course4Image from "./assets/course4.png";
 import course5Image from "./assets/course5.png";
@@ -14,11 +14,8 @@ import Medal1 from "./assets/Medal1.png";
 import Medal2 from "./assets/Medal2.png";
 import Medal3 from "./assets/Medal3.png";
 import Profile from "./assets/profile.jpg";
-import htmlfigure1 from "./assets/htmlfigure1.png";
-import htmlfigure2 from "./assets/htmlfigure2.png";
-import htmlfigure3 from "./assets/htmlfigure3.png";
 
-function Editors() {
+function Introduction() {
   const [userData, setUserData] = useState(null);
   const [responseCourseData, setResponseCourseData] = useState(null);
   const navigate = useNavigate();
@@ -60,7 +57,7 @@ function Editors() {
   };
 
   const handleNext = () => {
-    navigate('/LearnIT/MyLearning/HTML/Basic');
+    navigate('/LearnIT/MyLearning/HTML/Editors');
   };
 
   const handleHome = () => {
@@ -68,7 +65,7 @@ function Editors() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML/Introduction');
+    navigate('/LearnIT/MyLearning/HTML');
   };
 
   const handleNavHome = () => {
@@ -152,65 +149,69 @@ function Editors() {
           <div className="sidebar-topic">
               <h1>HTML Tutorial</h1>
               <div onClick={handleNavHome}>Html Home</div>
-              <div onClick={handleNavIntroduction}>Html Introduction</div>
-              <div className="current" onClick={handleNavEditors}>Html Editors</div>
+              <div className="current" onClick={handleNavIntroduction}>Html Introduction</div>
+              <div onClick={handleNavEditors}>Html Editors</div>
               <div onClick={handleNavBasic}>Html Basic</div>
               <div onClick={handleNavQuiz}>Html Quiz</div>
               <div>Html Results</div>
           </div>
-      <div className="topic-description">
-        <h1>HTML Editors</h1>
+          <div className="topic-description">
+        <h1>CSS Tutorial</h1>
         <div>
-          <div>A simple text editor is all you need to learn HTML.</div>
+          <div>CSS is the language we use to style a Web page.</div>
         </div>
-        <h1>Learn HTML Using Notepad or TextEdit</h1>
-        <p>Web pages can be created and modified by using professional HTML editors.</p>
-        <p>However, for learning HTML we recommend a simple text editor like Notepad (PC) or TextEdit (Mac).</p>
-        <p>We believe that using a simple text editor is a good way to learn HTML.</p>
-        <p>Follow the steps below to create your first web page with Notepad or TextEdit.</p>
-        <h1>Step 1: Open Notepad (PC)</h1>
-        <h3>Windows 8 or later:</h3>
-        <p>Open the Start Screen (the window symbol at the bottom left on your screen). Type Notepad.</p>
-        <h3>Windows 7 or earlier:</h3>
-        <p>Open Start {">"} Programs {">"} Accessories {">"} Notepad</p>
-        <h1>Step 1: Open TextEdit (Mac)</h1>
-        <p>Open Finder {">"} Applications {">"} TextEdit</p>
-        <p>Also change some preferences to get the application to save files correctly. In Preferences {">"} Format {">"} choose "Plain Text"</p>
-        <p>Then under "Open and Save", check the box that says "Display HTML files as HTML code instead of formatted text".</p>
-        <p>Then open a new document to place the code.</p>
         <div>
-          <h1>Step 2: Write Some HTML</h1>
-          <p>Write or copy the following HTML code into Notepad:</p>
+          <h1>What is Css?</h1>
           <div>
-            {'<!DOCTYPE html>'}
+            {'•  CSS stands for Cascading Style Sheets>'}
             <br />
-            {'<html>'}
+            {'•  CSS describes how HTML elements are to be displayed on screen, paper, or in other media'}
             <br />
-            {'<head>'}
+            {'•  CSS saves a lot of work. It can control the layout of multiple web pages all at once'}
             <br />
-            {'<title>'}Page Title{'</title>'}
+            {'•  External stylesheets are stored in CSS files'}
+            <div> 
+            <h1>CSS Demo - One HTML Page - Multiple Styles!</h1>
+            <p>Here we will show one HTML page displayed with four different stylesheets.</p>
+            <p>Click on the "Stylesheet 1", "Stylesheet 2", "Stylesheet 3", "Stylesheet 4" links below to see the different styles:</p>
+            <img src={CSSHomepage}></img>
+            <div>
+              <h1>Why Use CSS?</h1>
+              <p>CSS is used to define styles for your web pages, including the design, layout and variations in display for different devices and screen sizes.</p>
+              <div>
+            <div>
+            {'body {'}
             <br />
-            {'</head>'}
+            {'   background-color: lightblue;'}
             <br />
-            {'<body>'}
+            {'{'}
             <br />
-            {'<h1>This is a Heading</h1>'}
             <br />
-            {'<p>This is a paragraph</p>'}
+            {'h1 {'}
             <br />
-            {'</body>'}
+            {'   color: white;'}
             <br />
-            {'</html>'}
+            {'   text-align: center'}
+            <br />
+            <br />
+            {'}'}
+            <br />
+            {'p {'}
+            <br />
+            {'  font-family: verdana;'}
+            <br />
+            {'  font-size: 20px;'}
+            <br />
+            {'}'}
+              <h1>CSS Saves a Lot of Work!</h1>
+              <p>The style definitions are normally saved in external .css files.</p>
+              <br />
+              <p>With an external stylesheet file, you can change the look of an entire website by changing just one file!</p>
+              </div>
+              </div>
+            </div>
+            </div>
           </div>
-          <img src={htmlfigure1}></img>
-          <h1>Step 3: Save the HTML Page</h1>
-          <p>Save the file on your computer. Select File {">"} Save as in the Notepad menu.</p>
-          <p>Name the file "index.htm" and set the encoding to UTF-8 (which is the preferred encoding for HTML files).</p>
-          <img src={htmlfigure2}></img>
-          <h1>Step 4: View the HTML Page in Your Browser</h1>
-          <p>Open the saved HTML file in your favorite browser (double click on the file, or right-click - and choose "Open with").</p>
-          <p>The result will look much like this:</p>
-          <img src={htmlfigure3}></img>
         </div>
       </div>
           </div>
@@ -252,4 +253,4 @@ function Editors() {
   );
 }
 
-export default Editors;
+export default Introduction;
