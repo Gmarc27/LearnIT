@@ -30,9 +30,19 @@ const ResetPassword = () => {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/ResetPassword`, { token, newPassword });
             setMessage(response.data.message);
         } catch (error) {
-            setMessage(error.response.data.error);
+            if (error.response) {
+                // Server responded with a status other than 200 range
+                setMessage(error.response.data.error || 'An error occurred');
+            } else if (error.request) {
+                // Request was made but no response was received
+                setMessage('No response received from server. Please try again later.');
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                setMessage(`Error: ${error.message}`);
+            }
         }
     };
+    
 
     return (
         <div className='container'>
