@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/LearnIT/static/css/main.ab0cb573.css",
-    "main.js": "/LearnIT/static/js/main.03302bf3.js",
+    "main.js": "/LearnIT/static/js/main.b508dc30.js",
     "static/js/453.1118f7d6.chunk.js": "/LearnIT/static/js/453.1118f7d6.chunk.js",
     "static/media/course5.png": "/LearnIT/static/media/course5.64f637357bce0ccc8384.png",
     "static/media/Logo.png": "/LearnIT/static/media/Logo.599845fe7f4719aa2a6e.png",
@@ -16,11 +16,11 @@
     "static/media/profile.jpg": "/LearnIT/static/media/profile.0bfb883dddf5359d22bd.jpg",
     "index.html": "/LearnIT/index.html",
     "main.ab0cb573.css.map": "/LearnIT/static/css/main.ab0cb573.css.map",
-    "main.03302bf3.js.map": "/LearnIT/static/js/main.03302bf3.js.map",
+    "main.b508dc30.js.map": "/LearnIT/static/js/main.b508dc30.js.map",
     "453.1118f7d6.chunk.js.map": "/LearnIT/static/js/453.1118f7d6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ab0cb573.css",
-    "static/js/main.03302bf3.js"
+    "static/js/main.b508dc30.js"
   ]
 }
