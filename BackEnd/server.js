@@ -46,38 +46,59 @@ mongoose.connect('mongodb+srv://colladosgmarc06:SqMcSOzTpypuErxf@cluster0.6lpjbr
   
 
 // Define MongoDB Schemas
-const userSchema = new mongoose.Schema({
-    studentID: String,
-    email: String,
-    firstName: String,
-    lastName: String,
-    password: String,
-    age: { type: Number, default: 0 }, // Default value: 0 for age
+function formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+  
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+  
+    return [month, day, year].join('/');
+  }
+  
+  // Function to parse a date from mm/dd/yyyy
+  function parseDate(dateStr) {
+    const [month, day, year] = dateStr.split('/');
+    return new Date(year, month - 1, day);
+  }
+  
+  const userSchema = new mongoose.Schema({
+    studentID: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true, unique: true },
+    lastName: { type: String, required: true, unique: true },
+    password: { type: String, required: true, unique: true },
+    age: { type: Number, default: 0 },
     birthday: { 
-        type: Date, 
-        default: new Date('2000-01-01'), // Default value: January 1, 2000 for birthday
-        get: function() {
-            // Custom getter function to format date as YYYY-MM-DD
-            return this.birthday.toISOString().split('T')[0];
-        }
+      type: Date, 
+      default: parseDate('01/01/2000'),
+      get: formatDate,
+      set: parseDate
     },
-    course: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for course
-    school: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for school
+    course: { type: String, default: 'Unknown' },
+    school: { type: String, default: 'Unknown' },
     resetPasswordToken: String,
     resetPasswordExpires: Date
-});
+  }, {
+    toJSON: { getters: true },
+    toObject: { getters: true }
+  });
 
 const courseSchema = new mongoose.Schema({
-    courseID: Number,
-    title: String,
-    description: String,
-    content: String,
-    progress: Number,
+    courseID: { type: Number, required: true, unique: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    content: { type: String, required: true },
+    progress: { type: Number, default: 0 },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User' // This references the User collection
     }
   });
+
+courseSchema.index({ title: 1, user: 1 }, { unique: true });
 
 const User = mongoose.model('User', userSchema);
 const Course = mongoose.model('Course', courseSchema);
