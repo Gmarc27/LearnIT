@@ -68,16 +68,17 @@ const userSchema = new mongoose.Schema({
 });
 
 const courseSchema = new mongoose.Schema({
-    courseID: String,
-    title: String,
-    description: String,
-    content: String,
+    courseID: { type: Number, required: true, unique: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    content: { type: String, required: true },
     progress: { type: Number, default: 0 },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User' // This references the User collection
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
-  });
+});
 
 courseSchema.index({ title: 1, user: 1 }, { unique: true });
 
@@ -189,12 +190,35 @@ app.post('/SignupScreen', async (req, res) => {
 
 app.post('/addcourse', async (req, res) => {
     const { title, description, content, progress, userID } = req.body;
+
     try {
-        await Course.create({ title, description, content, progress, user: userID });
+        // Find the current sequence for courseID and increment it
+        const counter = await Counter.findOneAndUpdate(
+            { id: "courseID" },
+            { $inc: { seq: 1 } },
+            { new: true, upsert: true }
+        );
+
+        const courseID = counter.seq;
+
+        const newCourse = new Course({
+            courseID,
+            title,
+            description,
+            content,
+            progress,
+            user: userID
+        });
+
+        await newCourse.save();
         res.status(201).json({ message: 'Course data inserted successfully' });
     } catch (error) {
-        console.error('Error inserting course data:', error);
-        res.status(500).json({ error: 'Error inserting course data' });
+        if (error.code === 11000) { // Duplicate key error
+            res.status(400).json({ error: 'Course with this title already exists for the user' });
+        } else {
+            console.error('Error inserting course data:', error);
+            res.status(500).json({ error: 'Error inserting course data' });
+        }
     }
 });
 
