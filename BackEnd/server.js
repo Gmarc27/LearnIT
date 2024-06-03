@@ -68,7 +68,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const courseSchema = new mongoose.Schema({
-    courseID: { type: Number, required: true, unique: true },
+    courseID: String,
     title: { type: String, required: true },
     description: { type: String, required: true },
     content: { type: String, required: true },
@@ -190,35 +190,12 @@ app.post('/SignupScreen', async (req, res) => {
 
 app.post('/addcourse', async (req, res) => {
     const { title, description, content, progress, userID } = req.body;
-
     try {
-        // Find the current sequence for courseID and increment it
-        const counter = await Counter.findOneAndUpdate(
-            { id: "courseID" },
-            { $inc: { seq: 1 } },
-            { new: true, upsert: true }
-        );
-
-        const courseID = counter.seq;
-
-        const newCourse = new Course({
-            courseID,
-            title,
-            description,
-            content,
-            progress,
-            user: userID
-        });
-
-        await newCourse.save();
+        await Course.create({ title, description, content, progress, user: userID });
         res.status(201).json({ message: 'Course data inserted successfully' });
     } catch (error) {
-        if (error.code === 11000) { // Duplicate key error
-            res.status(400).json({ error: 'Course with this title already exists for the user' });
-        } else {
-            console.error('Error inserting course data:', error);
-            res.status(500).json({ error: 'Error inserting course data' });
-        }
+        console.error('Error inserting course data:', error);
+        res.status(500).json({ error: 'Error inserting course data' });
     }
 });
 
