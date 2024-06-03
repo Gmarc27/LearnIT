@@ -86,7 +86,7 @@ function formatDate(date) {
     toObject: { getters: true }
   });
 
-const courseSchema = new mongoose.Schema({
+  const courseSchema = new mongoose.Schema({
     courseID: { type: Number, required: true, unique: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -94,9 +94,10 @@ const courseSchema = new mongoose.Schema({
     progress: { type: Number, default: 0 },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User' // This references the User collection
+      ref: 'User',
+      required: true // Ensure user is always provided
     }
-  });
+});
 
 courseSchema.index({ title: 1, user: 1 }, { unique: true });
 
@@ -209,6 +210,7 @@ app.post('/SignupScreen', async (req, res) => {
 app.post('/addcourse', async (req, res) => {
     const { title, description, content, progress, userID } = req.body;
     try {
+        console.log('Received course data:', { title, description, content, progress, userID });
         await Course.create({ title, description, content, progress, user: userID });
         res.status(201).json({ message: 'Course data inserted successfully' });
     } catch (error) {

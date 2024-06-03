@@ -72,31 +72,32 @@ function MyLearning() {
     navigate("/LearnIT"); // Redirect to login screen
   };
 
-  const handleAddCourse = async ( title, description, content) => {
+  const handleAddCourse = async (title, description, content) => {
     try {
-      const userId = localStorage.getItem("token");
-      const courseData = {
-        title: title,
-        description: description,
-        content: content,
-        progress: 0, // Set initial progress to 0
-        userID: userId,
-      };
+        const userId = localStorage.getItem("token");
+        const courseData = {
+            title: title,
+            description: description,
+            content: content,
+            progress: 0, // Set initial progress to 0
+            userID: userId,
+        };
 
-      const response = await axios.post(
-        "https://learnit-1-aggl.onrender.com/addcourse",
-        courseData
-      );
+        const response = await axios.post(
+            "https://learnit-1-aggl.onrender.com/addcourse",
+            courseData
+        );
 
-      if (response.status === 201) {
-        console.log("Course added successfully:", response.data);
-      }
+        if (response.status === 201) {
+            console.log("Course added successfully:", response.data);
+        } else {
+            console.error("Failed to add course:", response.data);
+        }
 
-      // No navigation here
     } catch (error) {
-      console.error("Error adding course:", error);
+        console.error("Error adding course:", error);
     }
-  };
+};
 
   const handleViewContent = (courseId) => {
     navigate(`/LearnIT/MyLearning/${courseId}`);
