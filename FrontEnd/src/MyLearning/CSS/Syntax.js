@@ -149,7 +149,7 @@ function Syntax() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>CSS</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
           <div onClick={handleNext} className="button-next">Next {'>'}</div>
