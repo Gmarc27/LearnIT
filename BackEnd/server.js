@@ -31,7 +31,7 @@ mongoose.connect('mongodb+srv://colladosgmarc06:SqMcSOzTpypuErxf@cluster0.6lpjbr
       subject: 'Password Reset Request',
       text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n`
         + `Please click on the following link, or paste this into your browser to complete the process:\n\n`
-        + `https://gmarc27.github.io/LearnIT/ResetPassword?token=${token}\n\n`
+        + `http://localhost:3000/LearnIT/ResetPassword?token=${token}\n\n`
         + `If you did not request this, please ignore this email and your password will remain unchanged.\n`,
     };
   
