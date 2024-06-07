@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MembersList from './MembersList';
 import AddMember from './AddMember';
-import UpdateMember from './UpdateMember';
-import DeleteMember from './DeleteMember';
 
 const Members = () => {
   const [members, setMembers] = useState([]);
@@ -25,9 +23,7 @@ const Members = () => {
     <div>
       <h1>Members CRUD</h1>
       <AddMember fetchMembers={fetchMembers} />
-      <UpdateMember fetchMembers={fetchMembers} />
-      <DeleteMember fetchMembers={fetchMembers} />
-      <MembersList members={members} />
+      <MembersList members={members} fetchMembers={fetchMembers} />
     </div>
   );
 };

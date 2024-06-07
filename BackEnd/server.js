@@ -95,47 +95,49 @@ const Members = mongoose.model('Members', membersSchema);
 
 
 //Get
+// Get all members
 app.get('/members', async (req, res) => {
     try {
         const members = await Members.find();
         res.json(members);
     } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ error: 'Error fetching users' });
+        console.error('Error fetching members:', error);
+        res.status(500).json({ error: 'Error fetching members' });
     }
 });
-//Add
+
+// Add a member
 app.post('/memberAdd', async (req, res) => {
-    const { memberfirstName, memberlastName, memberEmail} = req.body;
+    const { memberfirstName, memberlastName, memberEmail } = req.body;
     try {
         await Members.create({ memberfirstName, memberlastName, memberEmail });
-        res.status(201).json({ message: 'Member data inserted successfully' });
+        res.status(201).json({ message: 'Member added successfully' });
     } catch (error) {
-        console.error('Error inserting member data:', error);
-        res.status(500).json({ error: 'Error inserting members data' });
+        console.error('Error adding member:', error);
+        res.status(500).json({ error: 'Error adding member' });
     }
 });
-//Remove
+
+// Delete a member
 app.delete('/memberDelete', async (req, res) => {
     const { memberfirstName, memberlastName } = req.body;
     try {
-        // Find the course to be deleted based on the title and user
         const memberToDelete = await Members.findOne({ memberfirstName, memberlastName });
 
         if (!memberToDelete) {
             return res.status(404).json({ error: 'Member not found' });
         }
 
-        // Delete the course
         await Members.findByIdAndDelete(memberToDelete._id);
 
-        res.json({ message: 'Course member successfully' });
+        res.json({ message: 'Member deleted successfully' });
     } catch (error) {
         console.error('Error deleting member:', error);
         res.status(500).json({ error: 'Error deleting member' });
     }
 });
-//Update
+
+// Update a member by email
 app.put('/members/:email', async (req, res) => {
     const { memberfirstName, memberlastName, memberEmail } = req.body;
     const memberEmailParam = req.params.email;
