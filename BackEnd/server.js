@@ -118,10 +118,10 @@ app.post('/memberAdd', async (req, res) => {
 });
 
 // Delete a member
-app.delete('/memberDelete', async (req, res) => {
-    const { memberfirstName, memberlastName } = req.body;
+app.delete('/members/:memberEmail', async (req, res) => {
+    const { memberEmail } = req.params;
     try {
-        const memberToDelete = await Members.findOne({ memberfirstName, memberlastName });
+        const memberToDelete = await Members.findOne({ memberEmail });
 
         if (!memberToDelete) {
             return res.status(404).json({ error: 'Member not found' });

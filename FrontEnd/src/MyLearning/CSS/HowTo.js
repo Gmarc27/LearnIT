@@ -149,7 +149,7 @@ function HowTo() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>CSS</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
           <div onClick={handleNext} className="button-next">Quiz {'>'}</div>
@@ -166,7 +166,7 @@ function HowTo() {
               <div>Css Results</div>
           </div>
           <div className="topic-description">
-          <h1>CSS Syntax</h1>
+          <h1>CSS How to</h1>
           <div>
           <div>A CSS selector selects the HTML element(s) you want to style.</div>
           <div>

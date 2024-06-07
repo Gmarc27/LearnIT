@@ -149,7 +149,7 @@ function Selectors() {
             </div>
         </section>
         <section className="resources">
-          <h2>HTML</h2>
+          <h2>CSS</h2>
           <div className="next-prev">
           <div onClick={handlePrevious} className="button-prev">{'<'} Previous</div>
           <div onClick={handleNext} className="button-next">Next {'>'}</div>
@@ -166,34 +166,72 @@ function Selectors() {
               <div>Css Results</div>
           </div>
           <div className="topic-description">
-          <h1>CSS Syntax</h1>
+          <h1>CSS Selectors</h1>
         <div>
-          <div>A CSS rule consists of a selector and a declaration block.</div>
+          <div>A CSS selector selects the HTML element(s) you want to style.</div>
           <div>
-            <h1>CSS Syntax</h1>
-            <p>The selector points to the HTML element you want to style.</p>
-            <p>The declaration block contains one or more declarations separated by semicolons.</p>
-            <p>Each declaration includes a CSS property name and a value, separated by a colon.</p>
-            <p>Multiple CSS declarations are separated with semicolons, and declaration blocks are surrounded by curly braces.</p>
+            <h1>CSS Selectors</h1>
+            <p>CSS selectors are used to "find" (or select) the HTML elements you want to style.</p>
+            <br />
+            <br />
+            <p>We can divide CSS selectors into five categories:</p>
+            <br />
+            <br />
+            {'•    Simple selectors (select elements based on name, id, class)'}
+            <br />
+            {'•    Combinator selectors (select elements based on a specific relationship between them)'}
+            <br />
+            {'•    Pseudo-class selectors (select elements based on a certain state)'}
+            <br />
+            {'•    Pseudo-elements selectors (select and style a part of an element)'}
+            <br />
+            {'•    Attribute selectors (select elements based on an attribute or attribute value)'}
+            <br />
+            <br />
+            {'This page will explain the most basic CSS selectors.'}
+            </div>
+            <div>
+            <h1>The CSS element Selector</h1>
+            <h2>The element selector selects HTML elements based on the element name.</h2>
           </div>
           <div>
             <h1>Example</h1>
-            <p> In this example all  {'<p>'} elements will be center-aligned, with a red text color: </p>
-            {'p {'}
-            <br />
-            {'  color: red;'}
-            <br />
+            <p>Here, all {'<p>'} elements on the page will be center-aligned, with a red text color: </p>
+            <p>{'  text-align: center;'}</p>
+            <p>{'  color: red;'}</p>
+            <p>{'p {'}</p>
+            </div>
+          <div>
+            <h1>The CSS id Selector</h1>
+            <h2>The id selector uses the id attribute of an HTML element to select a specific element</h2>
+            <h2>The id of an element is unique within a page, so the id selector is used to select one unique element!</h2>
+            <h2>To select an element with a specific id, write a hash (#) character, followed by the id of the element.</h2>
+            </div>
+            <div>
+                <h1>Example</h1>
+                <p>The CSS rule below will be applied to the HTML element with id="para1": </p>
+                <br />
+            {'#para1 {'}
+                <br />
             {'  text-align: center;'}
-            <br />
+                <br />
+            {'  color: red;'}
+                <br />
             {'}'}
             </div>
             <div>
-            <h1>Example Explained</h1>
-            {'•  p is a selector in CSS (it points to the HTML element you want to style: <p>).'}
+            <h1>The CSS class Selector</h1>
+            <h2>The class selector selects HTML elements with a specific class attribute.</h2>
+            <h2>To select elements with a specific class, write a period {'(.)'} character, followed by the class name.</h2>
             <br />
-            {'•  color is a property, and red is the property value'}
-            <br />
-            {'•  text-align is a property, and center is the property value'}
+            <div>
+            <h1>Example</h1>
+            <h2>In this example all HTML elements with class="center" will be red and center-aligned: </h2>
+            <p>{'.center {'}</p>
+            <p>{'  text-align: center;'}</p>
+            <p>{'  color: red;'}</p>
+            <p>{'}'}</p>
+            </div>
             </div>
         </div>
         <div>

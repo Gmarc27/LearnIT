@@ -18,9 +18,9 @@ const MembersList = ({ members, fetchMembers }) => {
     });
   };
 
-  const handleDeleteClick = async (memberEmail) => {
+  const handleDeleteClick = async (member) => {
     try {
-      await axios.delete(`https://learnit-1-aggl.onrender.com/members/${memberEmail}`);
+      await axios.delete(`https://learnit-1-aggl.onrender.com/members/${member.memberEmail}`);
       fetchMembers();
     } catch (error) {
       console.error('Error deleting member:', error);
@@ -62,7 +62,7 @@ const MembersList = ({ members, fetchMembers }) => {
               <td>{member.memberEmail}</td>
               <td>
                 <button onClick={() => handleUpdateClick(member)}>Update</button>
-                <button onClick={() => handleDeleteClick(member.memberEmail)}>Delete</button>
+                <button onClick={() => handleDeleteClick(member)}>Delete</button>
               </td>
             </tr>
           ))}
