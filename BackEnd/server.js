@@ -47,22 +47,21 @@ mongoose.connect('mongodb+srv://colladosgmarc06:SqMcSOzTpypuErxf@cluster0.6lpjbr
 
 // Define MongoDB Schemas
 const userSchema = new mongoose.Schema({
-    studentID: String,
-    email: String,
-    firstName: String,
-    lastName: String,
-    password: String,
-    age: { type: Number, default: 0 }, // Default value: 0 for age
+    studentID: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    password: { type: String, required: true },
+    age: { type: Number, default: 0 },
     birthday: { 
         type: Date, 
-        default: new Date('2000-01-01'), // Default value: January 1, 2000 for birthday
+        default: new Date('2000-01-01'),
         get: function() {
-            // Custom getter function to format date as YYYY-MM-DD
             return this.birthday.toISOString().split('T')[0];
         }
     },
-    course: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for course
-    school: { type: String, default: 'Unknown' }, // Default value: 'Unknown' for school
+    course: { type: String, default: 'Unknown' },
+    school: { type: String, default: 'Unknown' },
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });
@@ -180,14 +179,20 @@ app.post('/SignupScreen', async (req, res) => {
     const saltRounds = 10;
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        await User.create({ studentID, email, firstName, lastName, password: hashedPassword });
+        const newUser = await User.create({ studentID, email, firstName, lastName, password: hashedPassword });
+        console.log('User created:', newUser);
         res.status(201).json({ message: 'User data inserted successfully' });
     } catch (error) {
-        console.error('Error inserting user data:', error);
-        res.status(500).json({ error: 'Error inserting user data' });
+        console.error('Error details:', error);
+        if (error.code === 11000) {
+            res.status(409).json({ error: 'Duplicate entry detected' });
+        } else if (error.name === 'ValidationError') {
+            res.status(400).json({ error: 'Validation error' });
+        } else {
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 });
-
 app.post('/addcourse', async (req, res) => {
     const { title, description, content, progress, userID } = req.body;
     try {
