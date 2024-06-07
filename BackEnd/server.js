@@ -86,6 +86,7 @@ const membersSchema = new mongoose.Schema({
     memberEmail: String
 });
 
+membersSchema.index({ memberfirstName: 1, memberlastName: 1, memberEmail: 1 }, { unique: true });
 courseSchema.index({ title: 1, user: 1 }, { unique: true });
 
 const User = mongoose.model('User', userSchema);
