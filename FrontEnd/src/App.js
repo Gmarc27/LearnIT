@@ -33,6 +33,7 @@ import PythonComments from './MyLearning/Python/Comments';
 import PythonVariables from './MyLearning/Python/Variables';
 import PythonQuiz from './MyLearning/Python/PythonQuiz';
 import PythonResults from './MyLearning/Python/Results';
+import Members from './Members/Members';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       <Routes>
         <Route path="/LearnIT" element={<Home />} />
         <Route path="/LearnIT" element={<Home />} />
+        <Route path="/LearnIT/Members" element={<Members />} />
         <Route path="/LearnIT/ProfileScreen" element={<ProfileScreen />} />
         <Route path="/LearnIT/LoginScreen" element={<LoginScreen />} />
         <Route path="/LearnIT/ForgotPassword" element={<ForgotPassword />} />

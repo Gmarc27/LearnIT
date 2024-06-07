@@ -22,6 +22,8 @@ function AddCourse() {
   const [responseCourses, setResponseCourses] = useState(null);
   const navigate = useNavigate();
 
+  
+
   const handleHome = () => {
     navigate("/LearnIT/MyLearning");
   }

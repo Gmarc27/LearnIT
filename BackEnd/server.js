@@ -31,7 +31,7 @@ mongoose.connect('mongodb+srv://colladosgmarc06:SqMcSOzTpypuErxf@cluster0.6lpjbr
       subject: 'Password Reset Request',
       text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n`
         + `Please click on the following link, or paste this into your browser to complete the process:\n\n`
-        + `https://gmarc27.github.io/LearnIT/ResetPassword?token=${token}\n\n`
+        + `https://gmarc27.github.io/LearnIT/LearnIT/ResetPassword?token=${token}\n\n`
         + `If you did not request this, please ignore this email and your password will remain unchanged.\n`,
     };
   
@@ -79,10 +79,96 @@ const courseSchema = new mongoose.Schema({
     }
 });
 
+const membersSchema = new mongoose.Schema({
+    membersID: String,
+    memberfirstName: String,
+    memberlastName: String,
+    memberEmail: String
+});
+
 courseSchema.index({ title: 1, user: 1 }, { unique: true });
 
 const User = mongoose.model('User', userSchema);
 const Course = mongoose.model('Course', courseSchema);
+const Members = mongoose.model('Members', membersSchema);
+
+
+//Get
+// Get all members
+app.get('/members', async (req, res) => {
+    try {
+        const members = await Members.find();
+        res.json(members);
+    } catch (error) {
+        console.error('Error fetching members:', error);
+        res.status(500).json({ error: 'Error fetching members' });
+    }
+});
+
+// Add a member
+app.post('/memberAdd', async (req, res) => {
+    const { memberfirstName, memberlastName, memberEmail } = req.body;
+    try {
+        await Members.create({ memberfirstName, memberlastName, memberEmail });
+        res.status(201).json({ message: 'Member added successfully' });
+    } catch (error) {
+        console.error('Error adding member:', error);
+        res.status(500).json({ error: 'Error adding member' });
+    }
+});
+
+// Delete a member
+app.delete('/memberDelete', async (req, res) => {
+    const { memberfirstName, memberlastName } = req.body;
+    try {
+        const memberToDelete = await Members.findOne({ memberfirstName, memberlastName });
+
+        if (!memberToDelete) {
+            return res.status(404).json({ error: 'Member not found' });
+        }
+
+        await Members.findByIdAndDelete(memberToDelete._id);
+
+        res.json({ message: 'Member deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting member:', error);
+        res.status(500).json({ error: 'Error deleting member' });
+    }
+});
+
+// Update a member by email
+app.put('/members/:email', async (req, res) => {
+    const { memberfirstName, memberlastName, memberEmail } = req.body;
+    const memberEmailParam = req.params.email;
+
+    try {
+        const memberData = {
+            memberfirstName,
+            memberlastName,
+            memberEmail
+        };
+
+        // Make sure not to update the _id field
+        delete memberData._id;
+
+        // Find member by email and update with new data
+        const updatedMember = await Members.findOneAndUpdate(
+            { memberEmail: memberEmailParam },
+            memberData,
+            { new: true }
+        );
+
+        if (!updatedMember) {
+            return res.status(404).json({ error: 'Member not found' });
+        }
+
+        res.status(200).json({ message: 'Member data updated successfully', member: updatedMember });
+    } catch (error) {
+        console.error('Error updating member data:', error);
+        res.status(500).json({ error: 'Error updating member data' });
+    }
+});
+
 
 // Route definitions
 app.get('/', (req, res) => {

@@ -76,7 +76,7 @@ function Results() {
   }
 
   const handlePrevious = () => {
-    navigate('/LearnIT/MyLearning/HTML/Quiz');
+    navigate('/LearnIT/MyLearning/CSS/Quiz');
   };
 
   const handleUnjoinCourse = () => { 

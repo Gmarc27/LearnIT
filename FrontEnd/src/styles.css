@@ -136,8 +136,15 @@ body {
     border: 0;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.8);
   }
+  
   .addcourse-button:hover {
     background: linear-gradient(to bottom right, #f0eeee, #28B498);
+    transition: 0.2s;
+  }
+
+  .addcourse-button.clicked {
+    background: linear-gradient(to bottom right, #f0eeee, #28B498);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.8);
     transition: 0.2s;
   }
 
