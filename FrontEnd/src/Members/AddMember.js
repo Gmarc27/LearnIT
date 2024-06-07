@@ -23,14 +23,18 @@ const AddMember = ({ fetchMembers }) => {
   };
 
   return (
-    <div>
+    <div className='member-container'>
       <h2>Add Member</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="memberfirstName" placeholder="First Name" value={formData.memberfirstName} onChange={handleChange} required />
-        <input type="text" name="memberlastName" placeholder="Last Name" value={formData.memberlastName} onChange={handleChange} required />
-        <input type="email" name="memberEmail" placeholder="Email" value={formData.memberEmail} onChange={handleChange} required />
-        <button type="submit">Add Member</button>
+      <div className='member-add'>
+      <form onSubmit={handleSubmit} className='input-container'>
+        <div className='member-center'>
+        <input className="member-input" type="text" name="memberfirstName" placeholder="First Name" value={formData.memberfirstName} onChange={handleChange} required />
+        <input className="member-input" type="text" name="memberlastName" placeholder="Last Name" value={formData.memberlastName} onChange={handleChange} required />
+        <input className="member-input" type="email" name="memberEmail" placeholder="Email" value={formData.memberEmail} onChange={handleChange} required />
+        </div>
+        <button className="member-button" type="submit">Add Member</button>
       </form>
+      </div>
     </div>
   );
 };

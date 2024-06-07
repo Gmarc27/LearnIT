@@ -43,61 +43,74 @@ const MembersList = ({ members, fetchMembers }) => {
   };
 
   return (
-    <div>
+    <div className='member-container'>
       <h2>Members List</h2>
       <table>
-        <thead>
+        <thead className='member-display'>
           <tr>
-            <th>Member Names</th>
-            <th>Member Emails</th>
-            <th>Actions</th>
+            <div className='member-detail'>
+              <th>Member Names</th>
+              <th>Member Emails</th>
+            </div>
+            <div className='member-action'>
+              <th>Actions</th>
+            </div>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='member-display'>
           {members.map((member) => (
             <tr key={member._id}>
-              <td>
-                {member.memberfirstName} {member.memberlastName}
-              </td>
-              <td>{member.memberEmail}</td>
-              <td>
-                <button onClick={() => handleUpdateClick(member)}>Update</button>
-                <button onClick={() => handleDeleteClick(member)}>Delete</button>
-              </td>
+              <div className='member-detail'>
+                <td>
+                  {member.memberfirstName} {member.memberlastName}
+                </td>
+                <td>{member.memberEmail}</td>
+              </div>
+              <div className='member-action'>
+                <td>
+                  <button onClick={() => handleUpdateClick(member)}>Update</button>
+                  <button onClick={() => handleDeleteClick(member)}>Delete</button>
+                </td>
+              </div>
             </tr>
           ))}
         </tbody>
       </table>
 
       {selectedMember && (
-        <div>
+        <div className='member-container'>
           <h2>Update Member</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="memberfirstName"
-              placeholder="First Name"
-              value={formData.memberfirstName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="memberlastName"
-              placeholder="Last Name"
-              value={formData.memberlastName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="email"
-              name="memberEmail"
-              placeholder="Email"
-              value={formData.memberEmail}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit">Update Member</button>
+          <form onSubmit={handleSubmit} className='input-container'>
+            <div className='member-center'>
+              <input
+                className="member-input"
+                type="text"
+                name="memberfirstName"
+                placeholder="First Name"
+                value={formData.memberfirstName}
+                onChange={handleChange}
+                required
+              />
+              <input
+                className="member-input"
+                type="text"
+                name="memberlastName"
+                placeholder="Last Name"
+                value={formData.memberlastName}
+                onChange={handleChange}
+                required
+              />
+              <input
+                className="member-input"
+                type="email"
+                name="memberEmail"
+                placeholder="Email"
+                value={formData.memberEmail}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button className="member-button" type="submit">Update Member</button>
           </form>
         </div>
       )}

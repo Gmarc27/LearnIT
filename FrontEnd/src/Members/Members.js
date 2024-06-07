@@ -20,7 +20,7 @@ const Members = () => {
   }, []);
 
   return (
-    <div>
+    <div className='members-container'>
       <h1>Members CRUD</h1>
       <AddMember fetchMembers={fetchMembers} />
       <MembersList members={members} fetchMembers={fetchMembers} />
