@@ -30,7 +30,7 @@ const AddMember = ({ fetchMembers }) => {
         <div className='member-center'>
         <input className="member-input" type="text" name="memberfirstName" placeholder="First Name" value={formData.memberfirstName} onChange={handleChange} required />
         <input className="member-input" type="text" name="memberlastName" placeholder="Last Name" value={formData.memberlastName} onChange={handleChange} required />
-        <input className="member-input" type="email" name="memberEmail" placeholder="Email" value={formData.memberEmail} onChange={handleChange} required />
+        <input className="member-input" type="text" name="memberEmail" placeholder="Address" value={formData.memberEmail} onChange={handleChange} required />
         </div>
         <button className="member-button" type="submit">Add Member</button>
       </form>

@@ -1068,7 +1068,6 @@ body {
   display: flex;
   justify-content: start;
   max-width: 70vh;
-  margin: 2px;
   justify-content: center;
 }
 
@@ -1082,6 +1081,7 @@ body {
   display: flex;
   justify-content: start;
   width: 60vh;
+  border: 1px solid black;
 }
 
 .member-action {

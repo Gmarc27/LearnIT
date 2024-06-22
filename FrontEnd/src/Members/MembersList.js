@@ -50,7 +50,7 @@ const MembersList = ({ members, fetchMembers }) => {
           <tr>
             <div className='member-detail'>
               <th>Member Names</th>
-              <th>Member Emails</th>
+              <th>Member Address</th>
             </div>
             <div className='member-action'>
               <th>Actions</th>
