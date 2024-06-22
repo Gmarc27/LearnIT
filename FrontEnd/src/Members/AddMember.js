@@ -20,7 +20,7 @@ const AddMember = ({ fetchMembers }) => {
     } catch (error) {
       console.error('Error adding member:', error);
     }
-  };
+  };  
 
   return (
     <div className='member-container'>
